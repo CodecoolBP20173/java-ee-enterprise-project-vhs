@@ -2,6 +2,7 @@ package com.vhs.videostore.model;
 
 import java.beans.Transient;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 
@@ -13,11 +14,13 @@ public class Cassette {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToMany
+    private List<Rental> rentals;
+
     private boolean isRented;
 
     private Date purchaseDate;
 
-    @Transient
     private Integer age;
 
     @ManyToOne

@@ -1,11 +1,13 @@
-package main.java.com.vhs.videostore.model;
+package com.vhs.videostore.model;
+
+import com.vhs.videostore.model.Tag;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = Movies)
+@Table(name = "Movies")
 public class Movie {
 
     @Id
@@ -14,7 +16,9 @@ public class Movie {
     private String title;
     private int releaseDate;
     private int price;
-    ManyToMany
+
+    @ElementCollection
+    @CollectionTable
     List<Tag> tags = new ArrayList();
 
     public Movie(String title, int releaseDate, int price, List<Tag> tags) {

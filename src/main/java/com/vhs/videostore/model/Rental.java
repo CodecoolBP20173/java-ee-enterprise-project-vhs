@@ -1,6 +1,7 @@
 package com.vhs.videostore.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Rental {
@@ -12,8 +13,8 @@ public class Rental {
     @ManyToOne
     private User user;
 
-    @ManyToOne
-    private Cassette cassette;
+    @ManyToMany
+    private List<Cassette> cassettes;
 
     private long from; //We convert Date-s to long timestamp milliseconds
 
@@ -24,7 +25,7 @@ public class Rental {
 
     public Rental(User who, Cassette cassette, long from, long to) {
         this.user = who;
-        this.cassette = cassette;
+        this.cassettes.add(cassette);
         this.from = from;
         this.to = to;
     }
@@ -37,12 +38,8 @@ public class Rental {
         this.id = id;
     }
 
-    public Cassette getCassette() {
-        return cassette;
-    }
-
-    public void setCassette(Cassette cassette) {
-        this.cassette = cassette;
+    public List<Cassette> getCassette() {
+        return cassettes;
     }
 
     public long getFrom() {
