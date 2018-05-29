@@ -5,6 +5,7 @@ import com.vhs.videostore.model.User;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "Employees")
 public class Employee {
 
     @Id
