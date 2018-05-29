@@ -1,12 +1,14 @@
-package main.java.com.vhs.videostore.model;
+package com.vhs.videostore.model;
 
 import com.vhs.videostore.model.User;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Employees")
+@Table(name = "employees")
 public class Employee {
+
+    public Employee(){}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

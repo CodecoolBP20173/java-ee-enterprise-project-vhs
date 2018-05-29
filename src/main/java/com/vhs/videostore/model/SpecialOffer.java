@@ -1,6 +1,5 @@
 package com.vhs.videostore.model;
 
-import java.beans.Transient;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -24,6 +23,9 @@ public class SpecialOffer {
     private Date from;
 
     private Date to;
+
+    public SpecialOffer() {
+    }
 
     public Long getId() {
         return id;

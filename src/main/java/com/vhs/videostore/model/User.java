@@ -1,11 +1,7 @@
 package com.vhs.videostore.model;
 
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +16,9 @@ public class User {
     private String name;
     private String email;
     private String pwd;
-    @OneToMany(mappedBy = "Users", cascade = CascadeType.ALL)
-    List<Rental> rentals = new ArrayList();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<Rental> rentals = new ArrayList<>();
 
     public User(String name, String email, String pwd) {
         this.name = name;
@@ -34,6 +31,9 @@ public class User {
         this.email = email;
         this.pwd = pwd;
         this.rentals = rentals;
+    }
+
+    public User() {
     }
 
     public int getId() {

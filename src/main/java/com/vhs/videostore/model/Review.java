@@ -3,6 +3,7 @@ package com.vhs.videostore.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "reviews")
 public class Review {
 
     @Id
