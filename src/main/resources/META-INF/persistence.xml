@@ -16,9 +16,9 @@
         <property name="javax.persistence.schema-generation.scripts.drop-target" value="src/main/resources/META-INF/drop-schema.ddl"/>
 
         <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-        <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/VHSStore"/>
-        <property name="javax.persistence.jdbc.user" value="myUser"/>
-        <property name="javax.persistence.jdbc.password" value="myPwd"/>
+        <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/vhsstore"/>
+        <property name="javax.persistence.jdbc.user" value="kovacsadel"/>
+        <property name="javax.persistence.jdbc.password" value="Almafa12"/>
         <!--<property name="javax.persistence.sql-load-script-source" value="insert.sql"/>-->
     </properties>
 </persistence-unit>
