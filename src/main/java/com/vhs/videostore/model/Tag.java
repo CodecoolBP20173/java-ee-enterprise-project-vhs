@@ -1,4 +1,10 @@
-package main.java.com.vhs.videostore.model;
+package com.vhs.videostore.model;
 
-public class Tag {
+public enum  Tag {
+    SUPERHERO,
+    ROMANCE,
+    COMEDY,
+    LOVE,
+    CULTURE,
+    NATURE
 }
