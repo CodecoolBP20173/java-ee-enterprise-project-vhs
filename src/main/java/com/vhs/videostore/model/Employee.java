@@ -1,9 +1,18 @@
 package main.java.com.vhs.videostore.model;
 
+import com.vhs.videostore.model.User;
+
+import javax.persistence.*;
+
+@Entity
 public class Employee {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Enumerated(EnumType.STRING)
     private accessLevel accessRight;
+    @OneToOne
     private User user;
     private int salary;
 

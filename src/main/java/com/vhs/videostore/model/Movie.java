@@ -1,14 +1,19 @@
 package main.java.com.vhs.videostore.model;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Movie {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
     private int releaseDate;
     private int price;
+    ManyToMany
     List<Tag> tags = new ArrayList();
 
     public Movie(String title, int releaseDate, int price, List<Tag> tags) {

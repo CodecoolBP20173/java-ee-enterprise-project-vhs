@@ -1,13 +1,25 @@
-package main.java.com.vhs.videostore.model;
+package com.vhs.videostore.model;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.Table;
+
+import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
+@Entity
+@Table(name = "Users")
 public class User {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String email;
     private String pwd;
+    @OneToMany(mappedBy = "Users", cascade = CascadeType.ALL)
     List<Rental> rentals = new ArrayList();
 
     public User(String name, String email, String pwd) {
