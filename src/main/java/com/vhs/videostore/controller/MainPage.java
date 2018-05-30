@@ -20,7 +20,7 @@ public class MainPage extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         try {
-            engine.process("mainpage.html", context, resp.getWriter());
+            engine.process("index.html", context, resp.getWriter());
         } catch (IOException e) {
             e.printStackTrace();
         }
