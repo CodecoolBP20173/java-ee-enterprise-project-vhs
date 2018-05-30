@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool/VHS"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>VHS Store | Error</title>
 </head>
 <body>
-$END$
+    <h1>Something went wrong!</h1>
+
+    <h2>Details</h2>
+    <p th:text="${errorString}">Error message</p>
+
 </body>
 </html>
