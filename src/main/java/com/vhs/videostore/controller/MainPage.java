@@ -1,6 +1,7 @@
 package com.vhs.videostore.controller;
 
 import com.vhs.videostore.config.TemplateEngineUtil;
+import com.vhs.videostore.services.MainPageService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -18,6 +19,8 @@ public class MainPage extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
+
+        MainPageService.getAllMovies();
 
         try {
             engine.process("mainpage.html", context, resp.getWriter());
