@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>VHS</title>
@@ -11,39 +11,89 @@
     <!--Run Datatabe magic via js-->
     <script type="text/javascript" src="static/js/dataTable.js" rel="script"></script>
 
+    <!--Custom css-->
+    <link rel="stylesheet" type="text/css" href="static/css/custom.css">
+
 </head>
 <body>
 
 <div class="container">
-    <div class="row justify-content-md-center">
+    <div class="row justify-content-lg-center">
+        <div class="jumbotron bg-dark">
+            <h1 class="display-4 text-white">VHS Video rental</h1>
+            <hr class="my-4">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <th:block th:each="featuredMovie : ${featuredMovies}">
+                        <div class="carousel-item active">
+                            <div class="crop">
+                                <img src="static/img/img1.jpg" alt="First slide">
+                            </div>
+                            <div class="carousel-caption d-none d-md-block">
+                                <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                                    <div class="card-header">Featured now:</div>
+                                    <div class="card-body">
+                                        <h3 class="card-title" th:text="${featuredMovie.getTitle()}">MOVIE TITLE</h3>
+                                        <h5 class="card-title" th:text="${featuredMovie.getPrice()}">1000 USD</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+
+                    <div class="carousel-item">
+                        <div class="crop">
+                            <img src="static/img/img1.jpg" alt="First slide">
+                        </div>
+                        <div class="carousel-caption d-none d-md-block">
+                            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                                <div class="card-header">Featured now:</div>
+                                <div class="card-body">
+                                    <h3 class="card-title">MOVIE TITLE</h3>
+                                    <h5 class="card-title">1000 USD</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+
         <table id="movies_list" class="table">
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Movie</th>
+                <th scope="col">Rating</th>
+                <th scope="col">Price</th>
+                <th scope="col">Tags</th>
+
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-            </tr>
+            <th:block th:each="movie : ${movies}">
+                <tr>
+                    <td th:text="${movie.getId()}"></td>
+                    <td th:text="${movie.getTitle()}"></td>
+                    <td>rating TODO</td>
+                    <td th:text="${movie.getPrice()}"></td>
+                    <td th:text="${movie.getTags()}"></td>
+                </tr>
+            </th:block>
             </tbody>
         </table>
     </div>

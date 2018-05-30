@@ -1,0 +1,14 @@
+.crop {
+    width: 1050px;
+    height: 400px;
+    overflow: hidden;
+}
+
+.crop img {
+    width: 1000px;
+    margin: -100px 0 0 0px;
+}
+
+body {
+    background-color: #a5a5a5;
+}

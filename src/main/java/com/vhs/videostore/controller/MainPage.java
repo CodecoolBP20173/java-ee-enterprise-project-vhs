@@ -1,6 +1,8 @@
 package com.vhs.videostore.controller;
 
 import com.vhs.videostore.config.TemplateEngineUtil;
+import com.vhs.videostore.model.Movie;
+import com.vhs.videostore.model.Tag;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -10,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(urlPatterns = {"/"})
 public class MainPage extends HttpServlet {
@@ -18,6 +22,26 @@ public class MainPage extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
+
+        // sample context TODO: get from DB
+        List<Movie> movies = new ArrayList<>();
+        List<Tag> tags1 = new ArrayList<>();
+        tags1.add(Tag.CULTURE);
+        tags1.add(Tag.COMEDY);
+        movies.add(new Movie( "title", 2, 3123123,  tags1));
+        movies.add(new Movie( "another title", 21010, 11,  tags1));
+
+        List<Movie> featuredMovies = new ArrayList<>();
+        List<Tag> tags2 = new ArrayList<>();
+        tags1.add(Tag.LOVE);
+        tags1.add(Tag.COMEDY);
+        featuredMovies.add(new Movie( "featured TITLE", 2010, 3123123,  tags1));
+        featuredMovies.add(new Movie( "another featured movide title", 33, 10,  tags2));
+
+
+        context.setVariable("movies", movies);
+        context.setVariable("featuredMovies", featuredMovies);
+
 
         try {
             engine.process("index.html", context, resp.getWriter());
