@@ -10,14 +10,8 @@ public class MainPageService {
 
     public static List<Movie> getAllMovies(){
         EntityManager em = EMProvider.getEntityManagerInstance();
-        List movies = em.createQuery("SELECT m FROM Movie m", Movie.class).getResultList();
-        List<Movie> m = null;
-        try {
-            m = new ArrayList<>(movies);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return m;
+        List<Movie> movies = em.createQuery("SELECT m FROM Movie m", Movie.class).getResultList();
+        return movies;
     }
 
 }
