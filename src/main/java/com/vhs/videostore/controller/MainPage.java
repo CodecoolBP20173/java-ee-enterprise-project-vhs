@@ -1,6 +1,7 @@
 package com.vhs.videostore.controller;
 
 import com.vhs.videostore.config.TemplateEngineUtil;
+import com.vhs.videostore.services.MainPageService;
 import com.vhs.videostore.model.Movie;
 import com.vhs.videostore.model.Tag;
 import org.thymeleaf.TemplateEngine;
@@ -25,11 +26,13 @@ public class MainPage extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
+        List<Movie> movies = MainPageService.getAllMovies();
 
 
 
-        // sample context TODO: get from DB
-        List<Movie> movies = new ArrayList<>();
+
+//        // sample context TODO: get from DB
+//        List<Movie> movies = new ArrayList<>();
         List<Tag> tags1 = new ArrayList<>();
         List<Tag> tags2 = new ArrayList<>();
         tags1.add(Tag.CULTURE);
@@ -39,8 +42,8 @@ public class MainPage extends HttpServlet {
         Movie movie2 = new Movie( "another title", new Date(1999, 10, 1), 11,  tags2);
         movie1.setId(1);
         movie2.setId(2);
-        movies.add(movie1);
-        movies.add(movie2);
+//        movies.add(movie1);
+//        movies.add(movie2);
         List<Movie> featuredMovies = new ArrayList<>();
         featuredMovies.add(movie1);
         featuredMovies.add(movie2);
