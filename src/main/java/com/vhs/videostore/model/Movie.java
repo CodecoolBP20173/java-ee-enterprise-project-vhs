@@ -4,6 +4,7 @@ import com.vhs.videostore.model.Tag;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,14 +17,19 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
-    private int releaseDate;
-    private int price;
+    private Date releaseDate;
+    private float price;
+    private float rating;
+    private String description;
+
+    @OneToMany(mappedBy = "movie")
+    private List<Review> reviews;
 
     @ElementCollection
     @CollectionTable
     List<Tag> tags = new ArrayList();
 
-    public Movie(String title, int releaseDate, int price, List<Tag> tags) {
+    public Movie(String title, Date releaseDate, int price, List<Tag> tags) {
         this.title = title;
         this.releaseDate = releaseDate;
         this.price = price;
@@ -46,15 +52,15 @@ public class Movie {
         this.title = title;
     }
 
-    public int getReleaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(int releaseDate) {
+    public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
@@ -68,5 +74,29 @@ public class Movie {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }

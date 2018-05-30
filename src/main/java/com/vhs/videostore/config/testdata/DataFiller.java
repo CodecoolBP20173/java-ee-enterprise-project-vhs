@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class DataFiller {
@@ -20,8 +21,8 @@ public class DataFiller {
     public void fillMoviesTable(){
         List<Tag> tagList1 = new ArrayList<>(Arrays.asList(Tag.COMEDY, Tag.ROMANCE));
         List<Tag> tagList2 = new ArrayList<>(Arrays.asList(Tag.NATURE, Tag.CULTURE, Tag.SUPERHERO));
-        Movie movie1 = new Movie("Jumanji", 2018, 10, tagList1);
-        Movie movie2 = new Movie("Star Wars", 2018, 14, tagList2);
+        Movie movie1 = new Movie("Jumanji", new Date(1990, 10,10), 10, tagList1);
+        Movie movie2 = new Movie("Star Wars", new Date(2100, 10, 10), 14, tagList2);
 
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
