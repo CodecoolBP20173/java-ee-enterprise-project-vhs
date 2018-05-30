@@ -26,8 +26,14 @@ public class UserPage extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-        if (requestPath == null || wrongPath(requestPath)) {
-            context.setVariable("errorString", "Wrong URL path");
+        if (wrongPath(requestPath)) {
+            String errorMessage;
+            if(requestPath == null) {
+                errorMessage = "There was no user id given in the URL!";
+            } else {
+                errorMessage = "Wrong URL was given, please match the following format: /user/<userID> !";
+            }
+            context.setVariable("errorString", errorMessage);
             try {
                 engine.process("error.html", context, resp.getWriter());
             } catch (IOException e) {
@@ -84,6 +90,8 @@ public class UserPage extends HttpServlet {
     }
 
     private boolean wrongPath(String path) {
+        if (path == null) return true;
+
         String[] pathParams = path.split("/");
         try {
             int id = Integer.parseInt(pathParams[1]);
