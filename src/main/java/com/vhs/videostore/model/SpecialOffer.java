@@ -20,9 +20,9 @@ public class SpecialOffer {
     @OneToOne
     private Movie movie;
 
-    private Date from;
+    private Date fromDate;
 
-    private Date to;
+    private Date toDate;
 
     public SpecialOffer() {
     }
@@ -40,19 +40,19 @@ public class SpecialOffer {
     }
 
     public Date getFrom() {
-        return from;
+        return fromDate;
     }
 
-    public void setFrom(Date from) {
-        this.from = from;
+    public void setFrom(Date fromDate) {
+        this.fromDate = fromDate;
     }
 
     public Date getTo() {
-        return to;
+        return toDate;
     }
 
-    public void setTo(Date to) {
-        this.to = to;
+    public void setTo(Date toDate) {
+        this.toDate = toDate;
     }
 
     public Integer getDaysLeft() {
