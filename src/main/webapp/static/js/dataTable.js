@@ -18,5 +18,4 @@ $(document).ready( function () {
     document.getElementsByTagName("input")[0].addEventListener("click", function() {
         document.getElementById("jumbo").remove();
     });
-
 } );

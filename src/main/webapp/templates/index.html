@@ -91,5 +91,23 @@
         </table>
     </div>
 </div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+</button>
+<div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+
+                <div th:replace="filmModal.html :: copy"> </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
