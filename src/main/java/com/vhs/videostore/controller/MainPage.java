@@ -27,15 +27,14 @@ public class MainPage extends HttpServlet {
         // sample context TODO: get from DB
         List<Movie> movies = new ArrayList<>();
         List<Tag> tags1 = new ArrayList<>();
+        List<Tag> tags2 = new ArrayList<>();
         tags1.add(Tag.CULTURE);
         tags1.add(Tag.COMEDY);
+        tags2.add(Tag.COMEDY);
         movies.add(new Movie( "title", new Date(2010, 10, 13), 3123123,  tags1));
-        movies.add(new Movie( "another title", new Date(1999, 10, 1), 11,  tags1));
+        movies.add(new Movie( "another title", new Date(1999, 10, 1), 11,  tags2));
 
         List<Movie> featuredMovies = new ArrayList<>();
-        List<Tag> tags2 = new ArrayList<>();
-        tags1.add(Tag.LOVE);
-        tags1.add(Tag.COMEDY);
         featuredMovies.add(new Movie( "featured TITLE", new Date(1980, 1, 1), 3123123,  tags1));
         featuredMovies.add(new Movie( "another featured movide title", new Date(1890, 2, 3), 10,  tags2));
 

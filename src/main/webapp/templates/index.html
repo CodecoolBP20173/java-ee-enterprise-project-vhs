@@ -30,7 +30,7 @@
                 </ol>
                 <div class="carousel-inner">
                     <th:block th:each="featuredMovie : ${featuredMovies}">
-                        <div class="carousel-item active">
+                        <div class="carousel-item">
                             <div class="crop">
                                 <img src="static/img/img1.jpg" alt="First slide">
                             </div>
@@ -39,27 +39,13 @@
                                     <div class="card-header">Featured now:</div>
                                     <div class="card-body">
                                         <h3 class="card-title" th:text="${featuredMovie.getTitle()}">MOVIE TITLE</h3>
-                                        <h5 class="card-title" th:text="${featuredMovie.getPrice()}">1000 USD</h5>
+                                        <h5 class="card-title" th:text="${featuredMovie.getPrice()}+' USD'">1000
+                                            USD</h5>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </th:block>
-
-                    <div class="carousel-item">
-                        <div class="crop">
-                            <img src="static/img/img1.jpg" alt="First slide">
-                        </div>
-                        <div class="carousel-caption d-none d-md-block">
-                            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                                <div class="card-header">Featured now:</div>
-                                <div class="card-body">
-                                    <h3 class="card-title">MOVIE TITLE</h3>
-                                    <h5 class="card-title">1000 USD</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -78,6 +64,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Movie</th>
+                <th scope="col">Released</th>
                 <th scope="col">Rating</th>
                 <th scope="col">Price</th>
                 <th scope="col">Tags</th>
@@ -89,9 +76,14 @@
                 <tr>
                     <td th:text="${movie.getId()}"></td>
                     <td th:text="${movie.getTitle()}"></td>
+                    <td th:text="${movie.getReleaseDate().getYear()}"></td>
                     <td>rating TODO</td>
                     <td th:text="${movie.getPrice()}"></td>
-                    <td th:text="${movie.getTags()}"></td>
+                    <td>
+                        <th:block th:each="tag : ${movie.getTags()}">
+                            <span class="badge badge-pill badge-light" th:text="${tag.name()}">Placeholder tag</span>
+                        </th:block>
+                    </td>
                 </tr>
             </th:block>
             </tbody>
