@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/"})
@@ -28,15 +29,15 @@ public class MainPage extends HttpServlet {
         List<Tag> tags1 = new ArrayList<>();
         tags1.add(Tag.CULTURE);
         tags1.add(Tag.COMEDY);
-        movies.add(new Movie( "title", 2, 3123123,  tags1));
-        movies.add(new Movie( "another title", 21010, 11,  tags1));
+        movies.add(new Movie( "title", new Date(2010, 10, 13), 3123123,  tags1));
+        movies.add(new Movie( "another title", new Date(1999, 10, 1), 11,  tags1));
 
         List<Movie> featuredMovies = new ArrayList<>();
         List<Tag> tags2 = new ArrayList<>();
         tags1.add(Tag.LOVE);
         tags1.add(Tag.COMEDY);
-        featuredMovies.add(new Movie( "featured TITLE", 2010, 3123123,  tags1));
-        featuredMovies.add(new Movie( "another featured movide title", 33, 10,  tags2));
+        featuredMovies.add(new Movie( "featured TITLE", new Date(1980, 1, 1), 3123123,  tags1));
+        featuredMovies.add(new Movie( "another featured movide title", new Date(1890, 2, 3), 10,  tags2));
 
 
         context.setVariable("movies", movies);

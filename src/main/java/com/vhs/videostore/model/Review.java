@@ -13,12 +13,12 @@ public class Review {
     @ManyToOne
     private User owner;
 
+    @ManyToOne
+    private Movie movie;
+
     private String reviewText;
-
     private long timestamp;
-
     private int rating;
-
     private boolean moderated;
 
 
