@@ -6,6 +6,7 @@ import com.vhs.videostore.model.Tag;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
+import javax.persistence.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +25,9 @@ public class MainPage extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
+
+
+
         // sample context TODO: get from DB
         List<Movie> movies = new ArrayList<>();
         List<Tag> tags1 = new ArrayList<>();
@@ -31,12 +35,15 @@ public class MainPage extends HttpServlet {
         tags1.add(Tag.CULTURE);
         tags1.add(Tag.COMEDY);
         tags2.add(Tag.COMEDY);
-        movies.add(new Movie( "title", new Date(2010, 10, 13), 3123123,  tags1));
-        movies.add(new Movie( "another title", new Date(1999, 10, 1), 11,  tags2));
-
+        Movie movie1 = new Movie( "title", new Date(2010, 10, 13), 3123123,  tags1);
+        Movie movie2 = new Movie( "another title", new Date(1999, 10, 1), 11,  tags2);
+        movie1.setId(1);
+        movie2.setId(2);
+        movies.add(movie1);
+        movies.add(movie2);
         List<Movie> featuredMovies = new ArrayList<>();
-        featuredMovies.add(new Movie( "featured TITLE", new Date(1980, 1, 1), 3123123,  tags1));
-        featuredMovies.add(new Movie( "another featured movide title", new Date(1890, 2, 3), 10,  tags2));
+        featuredMovies.add(movie1);
+        featuredMovies.add(movie2);
 
 
         context.setVariable("movies", movies);
