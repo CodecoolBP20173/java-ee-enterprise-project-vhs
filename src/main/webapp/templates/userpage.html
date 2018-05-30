@@ -1,10 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool/VHS"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>VHS Store | Profile</title>
 </head>
 <body>
-$END$
+    <h1 th:text="${user.getName()} + ' | Profile' "></h1>
+    <div class="card" id="user">
+
+        <div id="user-profile" style="float: left; width: 30%">
+            <div id="user-picture">
+                <img src="http://placehold.it/200x200/000/fff" th:attr="src='/static/img/default_user.jpg'" width="200px" height="200px"/>
+            </div>
+            <div id="user-details">
+                <div>
+                    <label for="user-id">ID</label>
+                    <span id="user-id" th:text="${user.getId()}">00</span>
+                </div>
+                <div>
+                    <label for="user-name">USERNAME</label>
+                    <span id="user-name" th:text="${user.getName()}">John Doe</span>
+                </div>
+                <div>
+                    <label for="user-email">EMAIL</label>
+                    <span id="user-email" th:text="${user.getEmail()}">contact@vhs.com</span>
+                </div>
+                <div hidden>
+                    <label for="user-pwd">PASSWORD</label>
+                    <input id="user-pwd" type="password" disabled th:text="${user.getPwd()}" />
+                </div>
+            </div>
+        </div>
+
+        <div id="user-rental-history">
+            <h2>Rental history</h2>
+            <div id="user-rentals" th:switch="${user.getRentals().size()}">
+                <div th:case="0">
+                    There were no rentals before!
+                </div>
+                <table th:case="*">
+                    <thead>
+                        <tr>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                Cassettes
+                            </th>
+                            <th>
+                                Rental date
+                            </th>
+                            <th>
+                                Date of expire
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <th:block th:each="rental : ${user.getRentals()}">
+                            <tr>
+                                <td th:value="${rental.getId()}">00</td>
+                                <td>
+                                    <ul>
+                                    <th:block th:each="casette : ${rental.getCassette()}">
+                                        <li th:text="${casette.getMovie().getTitle()}">Sample data</li>
+                                    </th:block>
+                                    </ul>
+                                </td>
+                                <td th:text="${#dates.format(new java.util.Date(rental.getFromDate()))}"></td>
+                                <td th:text="${#dates.format(new java.util.Date(rental.getToDate()))}"></td>
+                            </tr>
+                        </th:block>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
