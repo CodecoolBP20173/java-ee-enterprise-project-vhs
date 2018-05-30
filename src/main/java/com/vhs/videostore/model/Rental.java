@@ -43,6 +43,10 @@ public class Rental {
         return cassettes;
     }
 
+    public void setCassettes(List<Cassette> cassettes) {
+        this.cassettes = cassettes;
+    }
+
     public long getFromDate() {
         return fromDate;
     }
