@@ -2,3 +2,40 @@
     color: whitesmoke;
     text-align: center;
 }
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 80%;
+    height: 510px;
+    margin: 0;
+    max-width: 1000px;
+    max-height: 600px;
+}
+
+.modal-content {
+    padding: 0;
+    background-image: url("/static/img/vhs_bg.png");
+    background-color: #343a40 !important;
+    background-size: contain;
+    height: 450px;
+
+
+}
+
+#movie-details-modal {
+
+    --modal-height: 30%;
+    /*height: calc(var(--modal-height) + 600px);*/
+}
+
+.modal-content > * {
+    background: none transparent;
+}
+
+#exampleModal {
+    /*top: -webkit-calc(50% - var(--modal-height));*/
+}
