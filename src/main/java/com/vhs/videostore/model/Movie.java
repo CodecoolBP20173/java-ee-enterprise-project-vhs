@@ -27,7 +27,7 @@ public class Movie {
 
     @ElementCollection
     @CollectionTable
-    List<Tag> tags = new ArrayList();
+    List<Tag> tags = new ArrayList<>();
 
     public Movie(String title, int releaseDate, int price, List<Tag> tags) {
         this.title = title;

@@ -32,8 +32,8 @@ function setupRows() {
 
         rows[i].addEventListener("click", function (e) {
             rows[i].getAttribute("id");
-            movieDetailsModal.populateModal(e.target.parentNode.getAttribute("id"));
-            $("#exampleModal").modal("show");
+            populateModal(e.target.parentNode.getAttribute("id"));
+
             e.preventDefault()
         })
     }
