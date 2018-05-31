@@ -4,7 +4,7 @@ $(document).ready(function () {
     $('#movies_list').DataTable();
 
     replaceSearchBar();
-
+    onSort();
     setupRows();
 
 });
@@ -18,9 +18,20 @@ function replaceSearchBar() {
     });
 }
 
+function onSort() {
+    let rows = document.getElementsByTagName("tr");
+    rows[0].addEventListener("click", function () {
+        setupRows();
+    })
+}
+
 function setupRows() {
     let rows = document.getElementsByTagName("tr");
     for (let i = 1; i < rows.length; i++) {
+        var old_element = rows[i];
+        var new_element = old_element.cloneNode(true);
+        old_element.parentNode.replaceChild(new_element, old_element);
+
         rows[i].addEventListener("mouseover", function (e) {
             rows[i].style.backgroundColor = "#434a50";
             rows[i].style.color = "#888888";
