@@ -6,12 +6,13 @@ $(".btn-primary").click(function (clicked_button) {
     $.ajax({
         type: 'POST',
         url: '/movie-details',
-        data: {'movieId': Id },
+        data: {'movieId': Id},
         success: function (data) {
             //showMovieDetails(data),
             console.log(data);
-            $('#movie_details_modal').append('<div>' + data.title +'</div>');
-            $('#movie_details_modal').append('<div>' + data.releaseDate +'</div>');
+            showMovieDetails(data)
+            /*$('#movie_details_modal').append('<div>' + data.title +'</div>');
+            $('#movie_details_modal').append('<div>' + data.releaseDate +'</div>');*/
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log("jqXHR : " + jqXHR + " text status : " + textStatus + " error : " + errorThrown);
@@ -19,9 +20,16 @@ $(".btn-primary").click(function (clicked_button) {
     })
 });
 
+$("#exampleModal").on("hidden.bs.modal", function () {
+    $('#modal-content').html("");
+});
+
 function showMovieDetails(data) {
-    $('#movie_details_modal').append('<div>' + data.title +'</div>');
-    $('#movie_details_modal').append('<div>' + data.releaseDate +'</div>');
-    //$('#movie-details-modal').append('<div>' + data[description] +'</div>')
+    $('#modal-content').append(
+        '<div><h4>' + data.title + '</h4></div>' +
+        '<div>' + data.releaseDate + '</div>' +
+        '<div>' + data.description + '</div>' +
+        '<img' + ' src="static/img/movie' + data.id + '.jpg"' + 'width="60px" >')
 
 }
+

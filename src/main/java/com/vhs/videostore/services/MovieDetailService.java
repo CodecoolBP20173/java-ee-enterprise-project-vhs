@@ -3,7 +3,6 @@ package com.vhs.videostore.services;
 import com.vhs.videostore.model.Movie;
 
 import javax.persistence.EntityManager;
-import java.util.List;
 
 public class MovieDetailService {
 
