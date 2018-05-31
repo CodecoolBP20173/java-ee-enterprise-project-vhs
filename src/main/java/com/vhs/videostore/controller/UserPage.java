@@ -31,9 +31,13 @@ public class UserPage extends HttpServlet {
         if (wrongPath(requestPath)) {
             String errorMessage;
             if(requestPath == null) {
-                errorMessage = "There was no user id given in the URL!";
+                errorMessage = "ERROR 404!\n" +
+                        "There was no user id given in the URL!";
             } else {
-                errorMessage = "Wrong URL was given, please match the following format: /user/<userID> !";
+                errorMessage = "ERROR 404!\n" +
+                        "You tried accessing: " + req.getRequestURI() + "\n" +
+                        "Wrong URL was given, please match the following format: /user/<int: userID>";
+
             }
             context.setVariable("errorString", errorMessage);
             try {
@@ -55,7 +59,8 @@ public class UserPage extends HttpServlet {
                     e.printStackTrace();
                 }
             } catch (NoResultException e) {
-                String errorMessage = "There is no known user with this ID!";
+                String errorMessage = "ERROR 404!\n" +
+                        "There is no known user with this ID (" + userID + ")!";
                 context.setVariable("errorString", errorMessage);
                 engine.process("error.html", context, resp.getWriter());
             }
@@ -72,7 +77,7 @@ public class UserPage extends HttpServlet {
             int id = Integer.parseInt(pathParams[1]);
             return pathParams.length != 2;
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return true;
         }
     }
