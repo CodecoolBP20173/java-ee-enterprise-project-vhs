@@ -24,6 +24,13 @@ public class SpecialOffer {
 
     private Date toDate;
 
+    public SpecialOffer(float specialPrice, Movie movie, Date fromDate, Date toDate) {
+        this.specialPrice = specialPrice;
+        this.movie = movie;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+    }
+
     public SpecialOffer() {
     }
 
