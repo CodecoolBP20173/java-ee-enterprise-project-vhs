@@ -14,6 +14,7 @@ public class Store {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         DataFiller df = new DataFiller(entityManager);
         df.fillMoviesTable();
+        df.fillSpecialOffersTable();
         entityManager.close();
         entityManagerFactory.close();
     }
