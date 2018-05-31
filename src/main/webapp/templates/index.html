@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>VHS</title>
 
+    <script type="text/javascript" charset="utf8" src="static/DataTables/datatables.js" defer></script>
     <!-- TODO To import in every html-->
     <link rel="stylesheet" type="text/css" href="static/DataTables/datatables.css">
     <script type="text/javascript" charset="utf8" src="static/DataTables/datatables.js"></script>
@@ -11,6 +12,7 @@
 
     <!--Run Datatabe magic via js-->
     <script type="text/javascript" src="static/js/dataTable.js" rel="script"></script>
+    <script type="text/javascript" src="static/js/movieDetailsModal.js" rel="script" defer></script>
 
     <!--Custom css-->
     <link rel="stylesheet" type="text/css" href="static/css/custom.css">
@@ -78,7 +80,7 @@
                 <tr th:id="${movie.getId()}">
                     <td th:text="${movie.getId()}"></td>
                     <td th:text="${movie.getTitle()}"></td>
-                    <td th:text="${movie.getReleaseDate().getYear()}"></td>
+                    <td th:text="${movie.getReleaseDate()}"></td>
                     <td th:text="${movie.getRating()}"></td>
                     <td th:text="${movie.getPrice()}"></td>
                     <td>
@@ -94,10 +96,10 @@
 </div>
 
 <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
 
-            <div class="modal-body">
+            <div class="modal-body bg-dark">
 
                 <div th:replace="filmModal.html :: copy"> </div>
 

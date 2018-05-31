@@ -17,7 +17,7 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
-    private Date releaseDate;
+    private int releaseDate;
     private float price;
     private float rating;
     private String description;
@@ -27,9 +27,9 @@ public class Movie {
 
     @ElementCollection
     @CollectionTable
-    List<Tag> tags = new ArrayList();
+    List<Tag> tags = new ArrayList<>();
 
-    public Movie(String title, Date releaseDate, int price, List<Tag> tags) {
+    public Movie(String title, int releaseDate, int price, List<Tag> tags) {
         this.title = title;
         this.releaseDate = releaseDate;
         this.price = price;
@@ -52,11 +52,11 @@ public class Movie {
         this.title = title;
     }
 
-    public Date getReleaseDate() {
+    public int getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(int releaseDate) {
         this.releaseDate = releaseDate;
     }
 
