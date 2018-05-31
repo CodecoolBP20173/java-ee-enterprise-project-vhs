@@ -30,17 +30,17 @@
                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 </ol>
                 <div class="carousel-inner">
-                    <th:block th:each="featuredMovie : ${featuredMovies}">
+                    <th:block th:each="specialOffer : ${specialOffers}">
                         <div class="carousel-item">
                             <div class="crop">
-                                <img th:src="'static/img/movie'+${featuredMovie.getId()}+'.jpg'" alt="First slide">
+                                <img th:src="'static/img/movie'+${specialOffer.getMovie().getId()}+'.jpg'" alt="First slide">
                             </div>
                             <div class="carousel-caption d-none d-md-block">
                                 <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
                                     <div class="card-header">Featured now:</div>
                                     <div class="card-body">
-                                        <h3 class="card-title" th:text="${featuredMovie.getTitle()}">MOVIE TITLE</h3>
-                                        <h5 class="card-title" th:text="${featuredMovie.getPrice()}+' USD'">1000
+                                        <h3 class="card-title" th:text="${specialOffer.getMovie().getTitle()}">MOVIE TITLE</h3>
+                                        <h5 class="card-title" th:text="${specialOffer.getMovie().getPrice()}+' USD'">1000
                                             USD</h5>
                                     </div>
                                 </div>
