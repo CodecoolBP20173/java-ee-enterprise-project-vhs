@@ -1,12 +1,13 @@
 package com.vhs.videostore.controller;
 
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.WebContext;
 import com.vhs.videostore.config.TemplateEngineUtil;
 import com.vhs.videostore.model.SpecialOffer;
 import com.vhs.videostore.services.MainPageService;
+import com.vhs.videostore.model.SpecialOffer;
 import com.vhs.videostore.model.Movie;
 import com.vhs.videostore.model.Tag;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.WebContext;
 
 import javax.persistence.*;
 import javax.servlet.ServletException;
