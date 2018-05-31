@@ -30,17 +30,17 @@
                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 </ol>
                 <div class="carousel-inner">
-                    <th:block th:each="featuredMovie : ${featuredMovies}">
+                    <th:block th:each="specialOffer : ${specialOffers}">
                         <div class="carousel-item">
                             <div class="crop">
-                                <img th:src="'static/img/movie'+${featuredMovie.getId()}+'.jpg'" alt="First slide">
+                                <img th:src="'static/img/movie'+${specialOffer.getMovie().getId()}+'.jpg'" alt="First slide">
                             </div>
                             <div class="carousel-caption d-none d-md-block">
                                 <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
                                     <div class="card-header">Featured now:</div>
                                     <div class="card-body">
-                                        <h3 class="card-title" th:text="${featuredMovie.getTitle()}">MOVIE TITLE</h3>
-                                        <h5 class="card-title" th:text="${featuredMovie.getPrice()}+' USD'">1000
+                                        <h3 class="card-title" th:text="${specialOffer.getMovie().getTitle()}">MOVIE TITLE</h3>
+                                        <h5 class="card-title" th:text="${specialOffer.getMovie().getPrice()}+' USD'">1000
                                             USD</h5>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
         </div>
 
 
-        <table id="movies_list" class="table table-striped table-dark">
+        <table id="movies_list" class="table table-striped ">
             <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -74,7 +74,7 @@
             </thead>
             <tbody>
             <th:block th:each="movie : ${movies}">
-                <tr>
+                <tr th:id="${movie.getId()}">
                     <td th:text="${movie.getId()}"></td>
                     <td th:text="${movie.getTitle()}"></td>
                     <td th:text="${movie.getReleaseDate().getYear()}"></td>
@@ -91,5 +91,23 @@
         </table>
     </div>
 </div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+</button>
+<div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+
+                <div th:replace="filmModal.html :: copy"> </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

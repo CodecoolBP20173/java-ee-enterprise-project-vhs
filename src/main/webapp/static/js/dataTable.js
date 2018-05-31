@@ -1,5 +1,4 @@
-
-$(document).ready( function () {
+$(document).ready(function () {
     let firstCarouselItem = $('.carousel-item:first');
     firstCarouselItem.addClass('active');
     $('#movies_list').DataTable();
@@ -15,8 +14,21 @@ $(document).ready( function () {
     //     jumbotron.hide();
     // };
 
-    document.getElementsByTagName("input")[0].addEventListener("click", function() {
-        document.getElementById("jumbo").remove();
+
+    document.getElementsByTagName("input")[0].addEventListener("click", function () {
+        $('#jumbo').hide('slow');
     });
 
-} );
+
+
+    let rows = document.getElementsByTagName("tr");
+    for (let row of rows) {
+        row.addEventListener("click", function (e) {
+            let currentId = row.getAttribute("id");
+
+            sessionStorage.setItem("currentMovie", currentId);
+            $("#exampleModal").modal("show");
+            e.preventDefault()
+        })
+    }
+});
