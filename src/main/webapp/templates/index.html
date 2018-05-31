@@ -7,6 +7,7 @@
     <!-- TODO To import in every html-->
     <link rel="stylesheet" type="text/css" href="static/DataTables/datatables.css">
     <script type="text/javascript" charset="utf8" src="static/DataTables/datatables.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
 
     <!--Run Datatabe magic via js-->
     <script type="text/javascript" src="static/js/dataTable.js" rel="script"></script>
@@ -78,7 +79,7 @@
                     <td th:text="${movie.getId()}"></td>
                     <td th:text="${movie.getTitle()}"></td>
                     <td th:text="${movie.getReleaseDate().getYear()}"></td>
-                    <td>rating TODO</td>
+                    <td th:text="${movie.getRating()}"></td>
                     <td th:text="${movie.getPrice()}"></td>
                     <td>
                         <th:block th:each="tag : ${movie.getTags()}">
@@ -92,10 +93,6 @@
     </div>
 </div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-</button>
 <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

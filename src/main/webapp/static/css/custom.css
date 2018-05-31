@@ -11,7 +11,7 @@
 }
 
 body {
-    background-color: #a5a5a5;
+    background-color: #b5b5b5;
 }
 
 .container {
@@ -24,4 +24,22 @@ body {
     background-color: #343a40;
     padding: 20px;
     color: white
+}
+
+#logo {
+    font-family: 'Russo One', sans-serif;
+    font-size: 30px;
+    background-color: RGBA(10, 0, 0, 0.2);
+    padding: 4px 14px 4px 14px;
+    border-radius: 2px;
+
+}
+
+#navbar {
+    background-color: #1c1c1c;
+    color: whitesmoke;
+    background-image: url('/static/img/filmstrip.jpg');
+    background-repeat: repeat-x;
+    background-size: contain;
+    height: 100px;
 }

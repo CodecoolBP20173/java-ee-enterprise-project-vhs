@@ -3,32 +3,38 @@ $(document).ready(function () {
     firstCarouselItem.addClass('active');
     $('#movies_list').DataTable();
 
+    replaceSearchBar();
+
+    setupRows();
+
+});
+
+function replaceSearchBar() {
     let searchBar = $('label:last');
     let toReplace = $('#searchReplace');
     toReplace.replaceWith(searchBar);
-
-
     document.getElementsByTagName("input")[0].addEventListener("click", function () {
         $('#jumbo').hide('slow');
     });
+}
 
-
-
+function setupRows() {
     let rows = document.getElementsByTagName("tr");
-    for (let row of rows) {
-        row.addEventListener("mouseover", function(e){
-            row.style.backgroundColor = "#434a50";
-            row.style.color = "#888888";
+    for (let i = 1; i < rows.length; i++) {
+        rows[i].addEventListener("mouseover", function (e) {
+            rows[i].style.backgroundColor = "#434a50";
+            rows[i].style.color = "#888888";
         });
-        row.addEventListener("mouseout", function(e){
-            row.style.backgroundColor = "#343a40";
-            row.style.color = "white";
+        rows[i].addEventListener("mouseout", function (e) {
+            rows[i].style.backgroundColor = "#343a40";
+            rows[i].style.color = "white";
         });
 
-
-        row.addEventListener("click", function (e) {
+        rows[i].addEventListener("click", function (e) {
+            rows[i].getAttribute("id");
+            movieDetailsModal.populateModal(e.target.parentNode.getAttribute("id"));
             $("#exampleModal").modal("show");
             e.preventDefault()
         })
     }
-});
+}
