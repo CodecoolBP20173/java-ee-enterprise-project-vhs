@@ -1,22 +1,40 @@
-
-$(document).ready( function () {
+$(document).ready(function () {
     let firstCarouselItem = $('.carousel-item:first');
     firstCarouselItem.addClass('active');
     $('#movies_list').DataTable();
 
+    replaceSearchBar();
+
+    setupRows();
+
+});
+
+function replaceSearchBar() {
     let searchBar = $('label:last');
     let toReplace = $('#searchReplace');
     toReplace.replaceWith(searchBar);
-
-    let searchInput = $('input:first');
-    console.log(searchInput);
-    // searchInput.onfocus = function (e) {
-    //     let jumbotron = $('.jumbotron');
-    //     jumbotron.hide();
-    // };
-
-    document.getElementsByTagName("input")[0].addEventListener("click", function() {
-        document.getElementById("jumbo").remove();
+    document.getElementsByTagName("input")[0].addEventListener("click", function () {
+        $('#jumbo').hide('slow');
     });
+}
 
-} );
+function setupRows() {
+    let rows = document.getElementsByTagName("tr");
+    for (let i = 1; i < rows.length; i++) {
+        rows[i].addEventListener("mouseover", function (e) {
+            rows[i].style.backgroundColor = "#434a50";
+            rows[i].style.color = "#888888";
+        });
+        rows[i].addEventListener("mouseout", function (e) {
+            rows[i].style.backgroundColor = "#343a40";
+            rows[i].style.color = "white";
+        });
+
+        rows[i].addEventListener("click", function (e) {
+            rows[i].getAttribute("id");
+            movieDetailsModal.populateModal(e.target.parentNode.getAttribute("id"));
+            $("#exampleModal").modal("show");
+            e.preventDefault()
+        })
+    }
+}
