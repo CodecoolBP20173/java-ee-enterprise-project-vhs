@@ -1,15 +1,10 @@
 package com.vhs.videostore.config.testdata;
 
-import com.vhs.videostore.model.Movie;
-import com.vhs.videostore.model.SpecialOffer;
-import com.vhs.videostore.model.Tag;
+import com.vhs.videostore.model.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class DataFiller {
 
@@ -62,5 +57,63 @@ public class DataFiller {
         em.persist(specialOffer3);
         transaction.commit();
 
+    }
+
+    public void fillUserTable() {
+        User adminAdel = new User("Adél", "adel@admins.vhs.com", "Almafa12");
+
+        User adminPeti = new User("Peti", "peti@admins.vhs.com", "MyPWD");
+
+
+        User adminAlex = new User("Alex", "alex@admins.vhs.com", "pwd");
+
+        setupSampleUser(adminAlex);
+
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+
+        em.persist(adminAdel);
+        em.persist(adminPeti);
+        em.persist(adminAlex);
+
+        transaction.commit();
+    }
+
+    private void setupSampleUser(User sampleUser) {
+
+        Movie movie = new Movie();
+        movie.setTitle("24H of Le Mans 2018");
+
+        Movie movie2 = new Movie();
+        movie2.setTitle("Black cat, white cat");
+
+
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+
+        em.persist(movie);
+        em.persist(movie2);
+
+        Cassette cassette = new Cassette();
+        cassette.setMovie(movie);
+
+        Cassette cassette2 = new Cassette();
+        cassette2.setMovie(movie2);
+
+        em.persist(cassette);
+        em.persist(cassette2);
+
+        Rental rental = new Rental();
+
+        rental.addCassette(cassette);
+        rental.addCassette(cassette2);
+
+        em.persist(rental);
+
+        sampleUser.addRental(rental);
+
+        em.persist(sampleUser);
+
+        transaction.commit();
     }
 }

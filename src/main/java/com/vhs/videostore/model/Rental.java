@@ -14,7 +14,7 @@ public class Rental {
     @ManyToOne
     private User user;
 
-    @ManyToMany(mappedBy = "rentals")
+    @ManyToMany
     private List<Cassette> cassettes = new ArrayList<>();
 
     private long fromDate; //We convert Date-s to long timestamp milliseconds
@@ -61,5 +61,17 @@ public class Rental {
 
     public void setToDate(long to) {
         this.toDate = to;
+    }
+
+    public void addCassette(Cassette cassette) {
+        this.cassettes.add(cassette);
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

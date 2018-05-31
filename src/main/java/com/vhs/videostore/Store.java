@@ -15,6 +15,7 @@ public class Store {
         DataFiller df = new DataFiller(entityManager);
         df.fillMoviesTable();
         df.fillSpecialOffersTable();
+        df.fillUserTable();
         entityManager.close();
         entityManagerFactory.close();
     }

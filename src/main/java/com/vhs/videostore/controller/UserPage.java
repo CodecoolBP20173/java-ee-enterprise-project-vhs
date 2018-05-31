@@ -5,9 +5,11 @@ import com.vhs.videostore.model.Cassette;
 import com.vhs.videostore.model.Movie;
 import com.vhs.videostore.model.Rental;
 import com.vhs.videostore.model.User;
+import com.vhs.videostore.services.UserPageService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
+import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,53 +42,26 @@ public class UserPage extends HttpServlet {
                 e.printStackTrace();
             }
         } else {
+
             int userID = Integer.parseInt(requestPath.split("/")[1]);
 
-            User sampleUser = new User();
-            setupSampleUser(sampleUser, userID);
-            // TODO: Change the sample user from actually querying it from the DB
-
-            context.setVariable("user", sampleUser);
-
+            User foundUser = null;
             try {
-                engine.process("userpage.html", context, resp.getWriter());
-            } catch (IOException e) {
-                e.printStackTrace();
+                foundUser = UserPageService.getUserByID(userID);
+                context.setVariable("user", foundUser);
+                try {
+                    engine.process("userpage.html", context, resp.getWriter());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (NoResultException e) {
+                String errorMessage = "There is no known user with this ID!";
+                context.setVariable("errorString", errorMessage);
+                engine.process("error.html", context, resp.getWriter());
             }
+
         }
 
-    }
-
-    private void setupSampleUser(User sampleUser, int _id) {
-        sampleUser.setId(_id);
-        sampleUser.setName("Alex Lisztes");
-        sampleUser.setPwd("samplePassword");
-        sampleUser.setEmail("driver77@ypracing.com");
-
-        Movie movie = new Movie();
-        movie.setTitle("24H of Le Mans 2018");
-
-        Movie movie2 = new Movie();
-        movie2.setTitle("Black cat, white cat");
-
-        Cassette cassette = new Cassette();
-        cassette.setMovie(movie);
-
-        Cassette cassette2 = new Cassette();
-        cassette2.setMovie(movie2);
-
-        Rental rental = new Rental();
-
-        List<Cassette> rentals = new ArrayList<>();
-        rentals.add(cassette);
-        rentals.add(cassette2);
-
-        rental.setCassettes(rentals);
-
-        List<Rental> rents = new ArrayList<>();
-        rents.add(rental);
-
-        sampleUser.setRentals(rents);
     }
 
     private boolean wrongPath(String path) {
