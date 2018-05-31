@@ -3,6 +3,7 @@ package com.vhs.videostore.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vhs.videostore.model.Movie;
 import com.vhs.videostore.services.MovieDetailService;
+import org.json.simple.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,8 +28,15 @@ public class MovieDetail extends HttpServlet {
 
         resp.setContentType("application/json");
 
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.writeValue(resp.getOutputStream(), movie);
+        JSONObject movieJSON = new JSONObject();
+        movieJSON.put("title", movie.getTitle());
+        movieJSON.put("releaseDate", Integer.toString(movie.getReleaseDate()));
+
+        resp.getWriter().print(movieJSON);
+
+        //ObjectMapper mapper = new ObjectMapper();
+        //mapper.writeValue(resp.getWriter().print();, movie);
+
 
     }
 }
