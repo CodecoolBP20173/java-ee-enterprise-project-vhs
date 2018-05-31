@@ -38,8 +38,8 @@ public class MainPage extends HttpServlet {
         tags1.add(Tag.CULTURE);
         tags1.add(Tag.COMEDY);
         tags2.add(Tag.COMEDY);
-        Movie movie1 = new Movie( "title", new Date(2010, 10, 13), 3123123,  tags1);
-        Movie movie2 = new Movie( "another title", new Date(1999, 10, 1), 11,  tags2);
+        Movie movie1 = new Movie( "title",2010, 3123123,  tags1);
+        Movie movie2 = new Movie( "another title",1999, 11,  tags2);
         movie1.setId(1);
         movie2.setId(2);
 //        movies.add(movie1);
