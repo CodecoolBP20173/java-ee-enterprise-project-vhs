@@ -18,7 +18,7 @@ public class User {
     private String pwd;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    List<Rental> rentals = new ArrayList<>();
+    private List<Rental> rentals = new ArrayList<>();
 
     public User(String name, String email, String pwd) {
         this.name = name;
@@ -74,5 +74,10 @@ public class User {
 
     public void setRentals(List<Rental> rentals) {
         this.rentals = rentals;
+    }
+
+    public void addRental(Rental rent) {
+        this.rentals.add(rent);
+        rent.setUser(this);
     }
 }
