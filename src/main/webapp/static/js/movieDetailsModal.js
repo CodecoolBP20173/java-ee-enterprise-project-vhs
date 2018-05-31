@@ -4,7 +4,6 @@ function populateModal(id) {
             url: '/movie-details',
             data: {'movieId': id},
             success: function (data) {
-                console.log(data);
                 showMovieDetails(data)
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -19,10 +18,19 @@ $("#exampleModal").on("hidden.bs.modal", function () {
 
 function showMovieDetails(data) {
     $('#modal-content').append(
-        '<div><h4>' + data.title + '</h4></div>' +
-        '<div>' + data.releaseDate + '</div>' +
-        '<div>' + data.description + '</div>' +
-        '<img' + ' src="static/img/movie' + data.id + '.jpg"' + 'width="120px" >');
+        '<div>' +
+            '<div id="modal-movie-picture">' +
+                // '<img' + ' src=' + 'width="120px" id="modal-movie-picture">' +
+            '</div>' +
+            '<div id="modal-movie-data">' +
+                '<div>' + data.title + '</div>' +
+                '<div>' + data.releaseDate + '</div>' +
+            '</div>' +
+        '<div id="modal-movie-description">' + ((data.description === null)? "No description provided" : data.description) + '</div>' +
+        '</div>');
+
+    document.getElementById("modal-movie-picture").style.backgroundImage = 'url(static/img/movie' + data.id + '.jpg)';
+
     $("#exampleModal").modal("show");
 }
 
