@@ -28,19 +28,8 @@ public class MovieDetail extends HttpServlet {
 
         resp.setContentType("application/json");
 
-        JSONObject movieJSON = new JSONObject();
-        movieJSON.put("id", movie.getId());
-        movieJSON.put("title", movie.getTitle());
-        movieJSON.put("releaseDate", Integer.toString(movie.getReleaseDate()));
-        movieJSON.put("description", movie.getDescription());
-        movieJSON.put("price", Float.toString(movie.getPrice()));
-        movieJSON.put("rating", Float.toString(movie.getRating()));
-        movieJSON.put("reviews", movie.getReviews());
-
-        resp.getWriter().print(movieJSON);
-
-        //ObjectMapper mapper = new ObjectMapper();
-        //mapper.writeValue(resp.getWriter().print();, movie);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValue(resp.getOutputStream(), movie);
 
 
     }
