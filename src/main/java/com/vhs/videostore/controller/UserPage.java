@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/user/*")
 public class UserPage extends HttpServlet {
 
     private UserPageService userPageService;

@@ -14,7 +14,7 @@ public class InitializationServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        //super.init();
+        super.init();
         EntityManager em = (Persistence.createEntityManagerFactory("VHS_PU")).createEntityManager();
         MainPageService mainPageService = new MainPageService(em);
         MovieDetailService movieDetailService = new MovieDetailService(em);

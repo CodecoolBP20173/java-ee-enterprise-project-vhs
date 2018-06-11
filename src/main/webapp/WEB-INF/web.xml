@@ -41,32 +41,19 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>InitializationServlet</servlet-name>
-        <url-pattern>/servlet/a</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
         <servlet-name>MainPage</servlet-name>
-        <url-pattern>/servlet/</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>MovieDetail</servlet-name>
-        <url-pattern>/servlet/movie-detail</url-pattern>
+        <url-pattern>/movie-detail</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>UserPage</servlet-name>
-        <url-pattern>/servlet/user/*</url-pattern>
+        <url-pattern>/user/*</url-pattern>
     </servlet-mapping>
-
-
-
-    <!--<servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/static/*</url-pattern>
-    </servlet-mapping>
--->
 
     <servlet-mapping>
         <servlet-name>default</servlet-name>
