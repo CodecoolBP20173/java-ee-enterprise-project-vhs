@@ -23,5 +23,11 @@ public class InitializationServlet extends HttpServlet {
         MovieDetail movieDetail = new MovieDetail(movieDetailService);
         UserPage userPage = new UserPage(userPageService);
 
+        getServletContext().setAttribute("mainPage", mainPage);
+        getServletContext().setAttribute("movieDetail", movieDetail);
+        getServletContext().setAttribute("userPage", userPage);
+
+
+
     }
 }
