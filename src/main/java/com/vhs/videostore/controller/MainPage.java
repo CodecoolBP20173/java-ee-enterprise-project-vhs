@@ -23,13 +23,20 @@ import java.util.List;
 @WebServlet(urlPatterns = {"/"})
 public class MainPage extends HttpServlet {
 
+    private MainPageService mainPageService;
+
+    public MainPage(MainPageService mainPageService) {
+        this.mainPageService = mainPageService;
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doGet(req, resp);
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-        List<Movie> movies = MainPageService.getAllMovies();
-        List<SpecialOffer> specialOffers = MainPageService.getAllSpecialOffers();
+        List<Movie> movies = mainPageService.getAllMovies();
+        List<SpecialOffer> specialOffers = mainPageService.getAllSpecialOffers();
 
 
         context.setVariable("movies", movies);

@@ -6,8 +6,13 @@ import javax.persistence.EntityManager;
 
 public class MovieDetailService {
 
-    public static Movie getSingleMovie(int id){
-        EntityManager em = EMProvider.getEntityManagerInstance();
+    private EntityManager em;
+
+    public MovieDetailService(EntityManager em) {
+        this.em = em;
+    }
+
+    public  Movie getSingleMovie(int id){
         return em.find(Movie.class, id);
     }
 
