@@ -1,7 +1,7 @@
 function populateModal(id) {
         $.ajax({
             type: 'POST',
-            url: '/movie-details',
+            url: '/movie-detail',
             data: {'movieId': id},
             success: function (data) {
                 showMovieDetails(data)
