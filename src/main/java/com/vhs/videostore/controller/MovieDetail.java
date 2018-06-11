@@ -12,19 +12,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
-
-@WebServlet(urlPatterns = "/movie-details")
 public class MovieDetail extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private MovieDetailService movieDetailService;
+
+    public MovieDetail(MovieDetailService movieDetailService) {
+        this.movieDetailService = movieDetailService;
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int movieId = Integer.parseInt(req.getParameter("movieId"));
-        Movie movie = MovieDetailService.getSingleMovie(movieId);
+        Movie movie = movieDetailService.getSingleMovie(movieId);
 
         resp.setContentType("application/json");
 
@@ -32,5 +31,13 @@ public class MovieDetail extends HttpServlet {
         mapper.writeValue(resp.getOutputStream(), movie);
 
 
+    }
+
+    public MovieDetailService getMovieDetailService() {
+        return movieDetailService;
+    }
+
+    public void setMovieDetailService(MovieDetailService movieDetailService) {
+        this.movieDetailService = movieDetailService;
     }
 }

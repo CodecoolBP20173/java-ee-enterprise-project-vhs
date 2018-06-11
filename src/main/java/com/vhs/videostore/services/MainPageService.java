@@ -19,16 +19,20 @@ import java.util.List;
 
 public class MainPageService {
 
-    public static List<Movie> getAllMovies(){
-        EntityManager em = EMProvider.getEntityManagerInstance();
+    private EntityManager em;
+
+    public MainPageService(EntityManager em) {
+        this.em = em;
+    }
+
+    public List<Movie> getAllMovies(){
         List<Movie> movies = em.createQuery("SELECT m FROM Movie m", Movie.class).getResultList();
         return movies;
     }
 
-    public static List<SpecialOffer> getAllSpecialOffers(){
+    public List<SpecialOffer> getAllSpecialOffers(){
 
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        EntityManager em = EMProvider.getEntityManagerInstance();
         TypedQuery<SpecialOffer> query = em.createQuery("SELECT s FROM SpecialOffer s" +
                 " WHERE s.toDate >= :currentTime", SpecialOffer.class);
         return query.setParameter("currentTime", currentTime).getResultList();

@@ -1,12 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	version="3.1">
-	<display-name>VHS Store</display-name>
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <display-name>VHS Store</display-name>
 
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>/static/*</url-pattern>
-	</servlet-mapping>
+    <servlet>
+        <servlet-name>InitializationServlet</servlet-name>
+        <servlet-class>com.vhs.videostore.controller.InitializationServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>MainPage</servlet-name>
+        <servlet-class>com.vhs.videostore.controller.DelegateHttpServlet</servlet-class>
+        <init-param>
+            <param-name>servletContextKey</param-name>
+            <param-value>mainPage</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>MovieDetail</servlet-name>
+        <servlet-class>com.vhs.videostore.controller.DelegateHttpServlet</servlet-class>
+        <init-param>
+            <param-name>servletContextKey</param-name>
+            <param-value>movieDetail</param-value>
+        </init-param>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>UserPage</servlet-name>
+        <servlet-class>com.vhs.videostore.controller.DelegateHttpServlet</servlet-class>
+        <init-param>
+            <param-name>servletContextKey</param-name>
+            <param-value>userPage</param-value>
+        </init-param>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MainPage</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MovieDetail</servlet-name>
+        <url-pattern>/movie-detail</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>UserPage</servlet-name>
+        <url-pattern>/user/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/static/*</url-pattern>
+    </servlet-mapping>
 
 </web-app>

@@ -8,8 +8,13 @@ import javax.persistence.TypedQuery;
 
 public class UserPageService {
 
-    public static User getUserByID(int _id) throws NoResultException {
-        EntityManager em = EMProvider.getEntityManagerInstance();
+    private EntityManager em;
+
+    public UserPageService(EntityManager em) {
+        this.em = em;
+    }
+
+    public User getUserByID(int _id) throws NoResultException {
         TypedQuery<User> query = em.createQuery(
                 "SELECT u FROM User u WHERE u.id = :userID", User.class
         );

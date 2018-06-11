@@ -19,8 +19,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/user/*")
 public class UserPage extends HttpServlet {
+
+    private UserPageService userPageService;
+
+    public UserPage(UserPageService userPageService) {
+        this.userPageService = userPageService;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -43,20 +48,20 @@ public class UserPage extends HttpServlet {
             try {
                 engine.process("error.html", context, resp.getWriter());
             } catch (IOException e) {
-                e.printStackTrace();
+                e.printStackTrace(); // TODO return generic error
             }
         } else {
 
             int userID = Integer.parseInt(requestPath.split("/")[1]);
 
-            User foundUser = null;
+            User foundUser;
             try {
-                foundUser = UserPageService.getUserByID(userID);
+                foundUser = userPageService.getUserByID(userID);
                 context.setVariable("user", foundUser);
                 try {
                     engine.process("userpage.html", context, resp.getWriter());
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    e.printStackTrace(); // TODO return generic error
                 }
             } catch (NoResultException e) {
                 String errorMessage = "ERROR 404!\n" +
@@ -74,11 +79,19 @@ public class UserPage extends HttpServlet {
 
         String[] pathParams = path.split("/");
         try {
-            int id = Integer.parseInt(pathParams[1]);
+            Integer.parseInt(pathParams[1]);
             return pathParams.length != 2;
         } catch (NumberFormatException e) {
 //            e.printStackTrace();
             return true;
         }
+    }
+
+    public UserPageService getUserPageService() {
+        return userPageService;
+    }
+
+    public void setUserPageService(UserPageService userPageService) {
+        this.userPageService = userPageService;
     }
 }
