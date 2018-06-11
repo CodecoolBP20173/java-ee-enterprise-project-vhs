@@ -86,4 +86,12 @@ public class UserPage extends HttpServlet {
             return true;
         }
     }
+
+    public UserPageService getUserPageService() {
+        return userPageService;
+    }
+
+    public void setUserPageService(UserPageService userPageService) {
+        this.userPageService = userPageService;
+    }
 }

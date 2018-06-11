@@ -48,4 +48,11 @@ public class MainPage extends HttpServlet {
         }
     }
 
+    public MainPageService getMainPageService() {
+        return mainPageService;
+    }
+
+    public void setMainPageService(MainPageService mainPageService) {
+        this.mainPageService = mainPageService;
+    }
 }

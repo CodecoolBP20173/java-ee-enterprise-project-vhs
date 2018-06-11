@@ -32,4 +32,12 @@ public class MovieDetail extends HttpServlet {
 
 
     }
+
+    public MovieDetailService getMovieDetailService() {
+        return movieDetailService;
+    }
+
+    public void setMovieDetailService(MovieDetailService movieDetailService) {
+        this.movieDetailService = movieDetailService;
+    }
 }
