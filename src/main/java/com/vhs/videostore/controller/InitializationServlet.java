@@ -22,10 +22,14 @@ public class InitializationServlet extends HttpServlet {
         MainPage mainPage = new MainPage(mainPageService);
         MovieDetail movieDetail = new MovieDetail(movieDetailService);
         UserPage userPage = new UserPage(userPageService);
+        Login login = new Login(userPageService);
+        Registration registration = new Registration(userPageService);
 
         getServletContext().setAttribute("mainPage", mainPage);
         getServletContext().setAttribute("movieDetail", movieDetail);
         getServletContext().setAttribute("userPage", userPage);
+        getServletContext().setAttribute("login", login);
+        getServletContext().setAttribute("registration", registration);
 
 
 
