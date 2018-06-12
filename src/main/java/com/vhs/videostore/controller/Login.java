@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class Login extends HttpServlet{
+public class Login extends HttpServlet {
 
     private UserPageService userPageService;
 
@@ -24,14 +24,15 @@ public class Login extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         HttpSession session = context.getSession();
 
-
         String email = req.getParameter("email");
+        System.out.println(email);
         String password = req.getParameter("password");
+        System.out.println(password);
         String hash = userPageService.getHashByEmail(email);
+        System.out.println(hash + " " + password + " " + email);
 
         boolean isVerified = Utility.verifyHash(password, hash);
         if (isVerified) {

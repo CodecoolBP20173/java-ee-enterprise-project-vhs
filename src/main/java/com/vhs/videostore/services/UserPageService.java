@@ -3,6 +3,7 @@ package com.vhs.videostore.services;
 import com.vhs.videostore.model.User;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
@@ -28,7 +29,7 @@ public class UserPageService {
                     "SELECT u FROM User u WHERE u.email = :email", User.class
             );
             query.setParameter("email", email);
-            return query.getSingleResult().getEmail();
+            return query.getSingleResult().getPwd();
         } catch (NoResultException e) {
             return null;
         }
@@ -47,6 +48,10 @@ public class UserPageService {
     }
 
     public void add(User userToAdd) {
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
         em.persist(userToAdd);
+        transaction.commit();
+        System.out.println(userToAdd.getName()+" saved to DB...");
     }
 }
