@@ -24,13 +24,14 @@ public class InitializationServlet extends HttpServlet {
         UserPage userPage = new UserPage(userPageService);
         Login login = new Login(userPageService);
         Registration registration = new Registration(userPageService);
+        Logout logout = new Logout();
 
         getServletContext().setAttribute("mainPage", mainPage);
         getServletContext().setAttribute("movieDetail", movieDetail);
         getServletContext().setAttribute("userPage", userPage);
         getServletContext().setAttribute("login", login);
         getServletContext().setAttribute("registration", registration);
-
+        getServletContext().setAttribute("logout", logout);
 
 
     }
