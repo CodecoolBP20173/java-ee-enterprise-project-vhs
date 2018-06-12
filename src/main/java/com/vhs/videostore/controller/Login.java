@@ -27,12 +27,17 @@ public class Login extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         HttpSession session = context.getSession();
 
-        String email = req.getParameter("email");
-        System.out.println(email);
-        String password = req.getParameter("password");
-        System.out.println(password);
-        String hash = userPageService.getHashByEmail(email);
-        System.out.println(hash + " " + password + " " + email);
+        String email = null;
+        String password = null;
+        String hash = null;
+        try {
+            email = req.getParameter("email");
+            password = req.getParameter("password");
+            hash = userPageService.getHashByEmail(email);
+        } catch (NullPointerException e) {
+            session.setAttribute("loggedIn", false);
+            System.out.println("login failed");
+        }
 
         boolean isVerified = Utility.verifyHash(password, hash);
         if (isVerified) {
