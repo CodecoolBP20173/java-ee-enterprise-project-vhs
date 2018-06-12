@@ -16,13 +16,18 @@ function replaceSearchBar() {
     document.getElementsByTagName("input")[0].addEventListener("click", function () {
         $('#jumbo').hide('slow');
     });
+    document.getElementsByTagName("input")[0].addEventListener("input", function () {
+        setupRows();
+    });
+
 }
 
 function onSort() {
     let rows = document.getElementsByTagName("tr");
     rows[0].addEventListener("click", function () {
         setupRows();
-    })
+    });
+
 }
 
 function setupRows() {
