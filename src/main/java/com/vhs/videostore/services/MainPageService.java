@@ -2,9 +2,11 @@ package com.vhs.videostore.services;
 
 import com.vhs.videostore.model.Movie;
 import com.vhs.videostore.model.SpecialOffer;
+import com.vhs.videostore.model.User;
 import org.omg.CORBA.TIMEOUT;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -36,5 +38,17 @@ public class MainPageService {
         TypedQuery<SpecialOffer> query = em.createQuery("SELECT s FROM SpecialOffer s" +
                 " WHERE s.toDate >= :currentTime", SpecialOffer.class);
         return query.setParameter("currentTime", currentTime).getResultList();
+    }
+
+    public User getUserById(Integer id) {
+        try {
+            TypedQuery<User> query = em.createQuery(
+                    "SELECT u FROM User u WHERE u.id = :id", User.class
+            );
+            query.setParameter("id", id);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 }

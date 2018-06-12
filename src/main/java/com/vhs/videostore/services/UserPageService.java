@@ -21,4 +21,32 @@ public class UserPageService {
         query.setParameter("userID", _id);
         return query.getSingleResult();
     }
+
+    public String getHashByEmail(String email) {
+        try {
+            TypedQuery<User> query = em.createQuery(
+                    "SELECT u FROM User u WHERE u.email = :email", User.class
+            );
+            query.setParameter("email", email);
+            return query.getSingleResult().getEmail();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public User getUserByEmail(String email) {
+        try {
+            TypedQuery<User> query = em.createQuery(
+                    "SELECT u FROM User u WHERE u.email = :email", User.class
+            );
+            query.setParameter("email", email);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public void add(User userToAdd) {
+        em.persist(userToAdd);
+    }
 }
