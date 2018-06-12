@@ -23,6 +23,8 @@
 
 <!-- TODO To import in every html-->
 <div th:replace="navbar.html :: copy"> </div>
+<div th:replace="loginModal.html :: login"> </div>
+<div th:replace="registrationModal.html :: registration"> </div>
 
 <div class="container">
     <div class="row justify-content-lg-center">
@@ -77,6 +79,7 @@
             </tr>
             </thead>
             <tbody>
+
             <th:block th:each="movie : ${movies}">
                 <tr th:id="${movie.getId()}">
                     <td th:text="${movie.getId()}"></td>
