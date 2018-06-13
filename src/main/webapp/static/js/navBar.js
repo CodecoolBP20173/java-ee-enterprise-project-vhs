@@ -19,5 +19,4 @@ function authButtons()
         registerButton.style.visibility = "hidden";
         logoutButton.style.visibility = "visible";
     }
-    console.log("running auth buttons...")
 }
