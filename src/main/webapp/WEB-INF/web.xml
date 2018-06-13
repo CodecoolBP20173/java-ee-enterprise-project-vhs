@@ -90,4 +90,15 @@
         <url-pattern>/static/*</url-pattern>
     </servlet-mapping>
 
+    <!-- Filters -->
+
+    <filter>
+        <filter-name>loginFilter</filter-name>
+        <filter-class>com.vhs.videostore.controller.filters.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <url-pattern>/user/*</url-pattern>
+    </filter-mapping>
+
 </web-app>
