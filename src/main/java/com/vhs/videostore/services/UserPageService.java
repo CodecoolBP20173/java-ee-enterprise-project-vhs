@@ -31,7 +31,7 @@ public class UserPageService {
             query.setParameter("email", email);
             return query.getSingleResult().getPwd();
         } catch (NoResultException e) {
-            return null;
+            return "";
         }
     }
 

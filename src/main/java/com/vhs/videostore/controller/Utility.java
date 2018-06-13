@@ -11,6 +11,9 @@ public class Utility {
     }
 
     public static boolean verifyHash(String password, String hash) {
+        if (hash.equals("")){
+            return false;
+        }
         return BCrypt.checkpw(password, hash);
     }
 }

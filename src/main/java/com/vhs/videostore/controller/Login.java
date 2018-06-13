@@ -24,20 +24,17 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         HttpSession session = context.getSession();
 
         String email = null;
         String password = null;
         String hash = null;
-        try {
-            email = req.getParameter("email");
-            password = req.getParameter("password");
-            hash = userPageService.getHashByEmail(email);
-        } catch (NullPointerException e) {
-            session.setAttribute("loggedIn", false);
-            System.out.println("login failed");
-        }
+
+        email = req.getParameter("email");
+        password = req.getParameter("password");
+        hash = userPageService.getHashByEmail(email);
 
         boolean isVerified = Utility.verifyHash(password, hash);
         if (isVerified) {
@@ -51,7 +48,8 @@ public class Login extends HttpServlet {
             session.setAttribute("loggedIn", false);
             System.out.println("login failed");
         }
-
         resp.sendRedirect("/");
     }
+
+
 }
