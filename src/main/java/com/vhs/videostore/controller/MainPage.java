@@ -43,11 +43,14 @@ public class MainPage extends HttpServlet {
                 context.setVariable("loggedIn", true);
                 User user = (User)session.getAttribute("user");
                 context.setVariable("user", user);
+                context.setVariable("loginFailed", false);
             }else {
                 context.setVariable("loggedIn", false);
+                context.setVariable("loginFailed", true);
             }
         }else {
             context.setVariable("loggedIn", false);
+            context.setVariable("loginFailed", false);
         }
         context.setVariable("movies", movies);
         context.setVariable("specialOffers", specialOffers);

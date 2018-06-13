@@ -1,26 +1,22 @@
 $(document).ready(function () {
+    $("#accessDenied").show();
     let firstCarouselItem = $('.carousel-item:first');
     firstCarouselItem.addClass('active');
-    $('#movies_list').DataTable();
 
-    replaceSearchBar();
+    initDataTable();
+    authButtons();
     onSort();
     setupRows();
-
 });
 
-function replaceSearchBar() {
-    let searchBar = $('label:last');
-    let toReplace = $('#searchReplace');
-    toReplace.replaceWith(searchBar);
-    document.getElementsByTagName("input")[0].addEventListener("click", function () {
-        $('#jumbo').hide('slow');
-    });
-    document.getElementsByTagName("input")[0].addEventListener("input", function () {
+function initDataTable() {
+    $('#movies_list').DataTable();
+    $('#movies_list').on( 'draw.dt', function () {
         setupRows();
-    });
-
+        $('#jumbo').hide('slow');
+    } );
 }
+
 
 function onSort() {
     let rows = document.getElementsByTagName("tr");
@@ -45,12 +41,29 @@ function setupRows() {
             rows[i].style.backgroundColor = "#343a40";
             rows[i].style.color = "white";
         });
-
         rows[i].addEventListener("click", function (e) {
             rows[i].getAttribute("id");
             populateModal(e.target.parentNode.getAttribute("id"));
 
             e.preventDefault()
         })
+    }
+}
+
+function authButtons()
+{
+    let loginButton = document.getElementById("loginButton");
+    let logoutButton = document.getElementById("logoutButton");
+    let registerButton = document.getElementById("registerButton");
+    let logLabelContent = document.getElementById("logLabel").innerText;
+
+    if(logLabelContent === "You are not logged in"){
+        loginButton.style.visibility = "visible";
+        registerButton.style.visibility = "visible";
+        logoutButton.style.visibility = "hidden";
+    } else {
+        loginButton.style.visibility = "hidden";
+        registerButton.style.visibility = "hidden";
+        logoutButton.style.visibility = "visible";
     }
 }
