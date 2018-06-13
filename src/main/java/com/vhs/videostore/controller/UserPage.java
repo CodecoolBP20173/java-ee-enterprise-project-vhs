@@ -33,6 +33,9 @@ public class UserPage extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
+        // Authentication check for navbar
+        context = Utility.loginFromSession(context, req);
+
         if (wrongPath(requestPath)) {
             String errorMessage;
             if(requestPath == null) {
