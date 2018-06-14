@@ -1,5 +1,5 @@
-$("#exampleModal").on("hidden.bs.modal", function () {
-    $('#modal-content').html("");
+$("#movieModal").on("hidden.bs.modal", function () {
+    $('#modal-movie-content').html("");
 });
 $("#loginModal").on("hidden.bs.modal", function () {
     $('#modal-login-message').html("");
@@ -22,7 +22,7 @@ function populateModal(id) {
 }
 
 function showMovieDetails(data) {
-    $('#modal-content').append(
+    $('#modal-movie-content').append(
         '<div>' +
         '<div id="modal-movie-picture">' +
         // '<img' + ' src=' + 'width="120px" id="modal-movie-picture">' +
@@ -32,7 +32,7 @@ function showMovieDetails(data) {
         '<div>' + data.releaseDate + '</div>' +
         '</div>' +
         '<div id="modal-movie-description">' + ((data.description === null) ? "No description provided" : data.description) + '</div>' +
-        '<button type="button" class="btn btn-info" id="btn-rent-movie" data-movie-id="' + data.id + '">Rent</button> ' +
+        '<button type="button" class="btn btn-info rent" id="btn-rent-movie" data-movie-id="' + data.id + '">Rent</button> ' +
         '</div>'
     );
 
@@ -40,11 +40,11 @@ function showMovieDetails(data) {
 
     $('#btn-rent-movie').on('click', function () {
         let movie_id = $(this).data("movie-id");
-        $('#exampleModal').modal('hide');
+        $('#movieModal').modal('hide');
         evalRentAction(movie_id);
     });
 
-    $("#exampleModal").modal("show");
+    $("#movieModal").modal("show");
 
 }
 
@@ -54,7 +54,7 @@ function evalRentAction(movieId){
         url: '/logged-in-user-id',
         success: function (userId) {
             if (userId === "0"){
-                $('#modal-login-message').html("To do a rent please log in or register!");
+                $('#modal-login-message').html("In order to make a rent please log in or register!");
                 $('#loginModal').modal('show');
             } else {
                 $.ajax({
