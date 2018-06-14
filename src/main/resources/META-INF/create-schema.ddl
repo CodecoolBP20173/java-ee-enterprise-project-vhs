@@ -1709,3 +1709,21 @@ alter table Rental_cassettes add constraint FKq8kitli6g7pfsi3wkl1pbiysd foreign 
 alter table reviews add constraint FKej96n97s0r1jckcbao42pglun foreign key (movie_id) references Movies
 alter table reviews add constraint FK6vg7p3yfcik4v74ebqo45duku foreign key (owner_id) references Users
 alter table special_offers add constraint FKabjtc4mdxc9elsrs54ecxkb6f foreign key (movie_id) references Movies
+create table cassettes (id  bigserial not null, age int4, isRented boolean not null, purchaseDate timestamp, movie_id int4, primary key (id))
+create table employees (id  serial not null, accessRight varchar(255), salary int4 not null, user_id int4, primary key (id))
+create table Movie_tags (Movie_id int4 not null, tags int4)
+create table Movies (id  serial not null, description varchar(255), price float4 not null, rating float4 not null, releaseDate int4 not null, title varchar(255), primary key (id))
+create table Rental (id  serial not null, fromDate int8 not null, toDate int8 not null, user_id int4, primary key (id))
+create table Rental_cassettes (rentals_id int4 not null, cassettes_id int8 not null)
+create table reviews (id  serial not null, moderated boolean not null, rating int4 not null, reviewText varchar(255), timestamp int8 not null, movie_id int4, owner_id int4, primary key (id))
+create table special_offers (id  bigserial not null, fromDate timestamp, specialPrice float4 not null, toDate timestamp, movie_id int4, primary key (id))
+create table Users (id  serial not null, email varchar(255), name varchar(255), pwd varchar(255), primary key (id))
+alter table cassettes add constraint FKtnwpn4s97d1urvce9iujlhv86 foreign key (movie_id) references Movies
+alter table employees add constraint FKhj9fe6747jhe3ychvwt5q1p48 foreign key (user_id) references Users
+alter table Movie_tags add constraint FK6xssq5ame6kw4guiaoi64ea8d foreign key (Movie_id) references Movies
+alter table Rental add constraint FK62m7xl5o3uv771ar4ttinnpcf foreign key (user_id) references Users
+alter table Rental_cassettes add constraint FK4fcemedg55b322ls9pqq17pjk foreign key (cassettes_id) references cassettes
+alter table Rental_cassettes add constraint FKq8kitli6g7pfsi3wkl1pbiysd foreign key (rentals_id) references Rental
+alter table reviews add constraint FKej96n97s0r1jckcbao42pglun foreign key (movie_id) references Movies
+alter table reviews add constraint FK6vg7p3yfcik4v74ebqo45duku foreign key (owner_id) references Users
+alter table special_offers add constraint FKabjtc4mdxc9elsrs54ecxkb6f foreign key (movie_id) references Movies
