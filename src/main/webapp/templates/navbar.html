@@ -3,11 +3,14 @@
 <body>
 <div th:fragment="copy">
     <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+        <a class="navbar-brand" id="logo" href="/">VHS - Very Hibernate Solution</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="navbar-brand" id="logo" href="#">VHS - Very Hibernate Solution</a>
-                </li>
                 <li class="nav-item" id="loginButton">
                     <button type="button" class="btn btn-outline-primary my-2 my-sm-2" data-toggle="modal"
                             data-target="#loginModal">
@@ -20,13 +23,20 @@
                         Register
                     </button>
                 </li>
-
             </ul>
+            <div id="logLabel">
             <span
-                    id="logLabel"
+                    th:if="${!loggedIn}"
                     class="navbar-text"
-                    th:text="${loggedIn}? 'logged in as: '+${user.getName()} : 'You are not logged in'"
+                    th:text="'You are not logged in'"
             ></span>
+                <a
+                        class="btn btn-primary btn-sm"
+                        th:href="'/user/' + ${user.getId()}"
+                        th:if="${loggedIn}"
+                        th:text="${user.getName()}+ '\'s profile'"
+                ></a>
+            </div>
             <div id="logoutButton">
                 <form action="/logout" method="post" class="form-inline my-2 my-lg-2 ml-2">
                     <button class="btn btn-outline-primary my-2 my-sm-0">
