@@ -27,6 +27,7 @@ public class RentalService {
         Cassette cassette = query.getSingleResult();
 
         Rental rental = new Rental(user, cassette, 10,15);
+        user.addRental(rental);
 
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
