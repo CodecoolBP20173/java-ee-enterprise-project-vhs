@@ -16,6 +16,10 @@
     max-height: 600px;
 }
 
+.modal-content-simple {
+    background-color: #0c5460;
+}
+
 .modal-content {
     padding: 0;
     background-image: url("/static/img/vhs_bg.png");
@@ -79,4 +83,10 @@
 
 .modal-content > * {
     background: none transparent;
+}
+
+#btn-rent-movie {
+    position: fixed;
+    bottom: 0;
+    right: 0;
 }

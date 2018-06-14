@@ -57,7 +57,27 @@
             <param-name>servletContextKey</param-name>
             <param-value>movieDetail</param-value>
         </init-param>
-        <load-on-startup>3</load-on-startup>
+        <load-on-startup>4</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>GetUserId</servlet-name>
+        <servlet-class>com.vhs.videostore.controller.GetUserId</servlet-class>
+        <init-param>
+            <param-name>servletContextKey</param-name>
+            <param-value>getUserId</param-value>
+        </init-param>
+        <load-on-startup>5</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>Rental</servlet-name>
+        <servlet-class>com.vhs.videostore.controller.DelegateHttpServlet</servlet-class>
+        <init-param>
+            <param-name>servletContextKey</param-name>
+            <param-value>renting</param-value>
+        </init-param>
+        <load-on-startup>6</load-on-startup>
     </servlet>
 
     <servlet>
@@ -67,8 +87,18 @@
             <param-name>servletContextKey</param-name>
             <param-value>userPage</param-value>
         </init-param>
-        <load-on-startup>3</load-on-startup>
+        <load-on-startup>6</load-on-startup>
     </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetUserId</servlet-name>
+        <url-pattern>/logged-in-user-id</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Rental</servlet-name>
+        <url-pattern>/rent-movie</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>MainPage</servlet-name>

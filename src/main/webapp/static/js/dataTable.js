@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    $("#accessDenied").show();
     let firstCarouselItem = $('.carousel-item:first');
     firstCarouselItem.addClass('active');
 

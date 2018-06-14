@@ -1,9 +1,6 @@
 package com.vhs.videostore.controller;
 
-import com.vhs.videostore.services.EMProvider;
-import com.vhs.videostore.services.MainPageService;
-import com.vhs.videostore.services.MovieDetailService;
-import com.vhs.videostore.services.UserPageService;
+import com.vhs.videostore.services.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -19,11 +16,14 @@ public class InitializationServlet extends HttpServlet {
         MainPageService mainPageService = new MainPageService(em);
         MovieDetailService movieDetailService = new MovieDetailService(em);
         UserPageService userPageService = new UserPageService(em);
+        RentalService rentalService = new RentalService(em);
+
         MainPage mainPage = new MainPage(mainPageService);
         MovieDetail movieDetail = new MovieDetail(movieDetailService);
         UserPage userPage = new UserPage(userPageService);
         Login login = new Login(userPageService);
         Registration registration = new Registration(userPageService);
+        Renting renting = new Renting(rentalService);
         Logout logout = new Logout();
 
         getServletContext().setAttribute("mainPage", mainPage);
@@ -31,6 +31,7 @@ public class InitializationServlet extends HttpServlet {
         getServletContext().setAttribute("userPage", userPage);
         getServletContext().setAttribute("login", login);
         getServletContext().setAttribute("registration", registration);
+        getServletContext().setAttribute("renting", renting);
         getServletContext().setAttribute("logout", logout);
 
 
