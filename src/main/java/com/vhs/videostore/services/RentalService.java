@@ -4,6 +4,7 @@ import com.vhs.videostore.model.Cassette;
 import com.vhs.videostore.model.Movie;
 import com.vhs.videostore.model.Rental;
 import com.vhs.videostore.model.User;
+import org.hibernate.Session;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -25,9 +26,16 @@ public class RentalService {
         );
         query.setParameter("movie", movie);
         Cassette cassette = query.getSingleResult();
+        Rental rental = new Rental(user, cassette, 20180615,20180618);
 
-        Rental rental = new Rental(user, cassette, 10,15);
-        user.addRental(rental);
+        // 1.
+        //user.addRental(rental);
+
+        Session session = em.unwrap(Session.class);
+        // 2.
+        //session.clear();
+        // 3.
+        session.evict(user);
 
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
