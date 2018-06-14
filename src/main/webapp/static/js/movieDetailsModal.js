@@ -1,3 +1,11 @@
+$("#exampleModal").on("hidden.bs.modal", function () {
+    $('#modal-content').html("");
+});
+$("#loginModal").on("hidden.bs.modal", function () {
+    $('#modal-login-message').html("");
+});
+
+
 function populateModal(id) {
     $.ajax({
         type: 'POST',
@@ -10,46 +18,21 @@ function populateModal(id) {
             console.log("jqXHR : " + jqXHR + " text status : " + textStatus + " error : " + errorThrown);
         }
     });
-}
 
-function evalRentAction(movieId){
-    $.ajax({
-        type: 'POST',
-        url: '/logged-in-user-id',
-        success: function (userId) {
-            if (userId === "0"){
-                console.log("crap");
-                $('#accessDenied').modal('show');
-            } else {
-                $.ajax({
-                    type: 'POST',
-                    url: '/rent-movie',
-                    data: {'userId': userId, 'movieId' : movieId},
-                    success: function () {
-                        console.log("Renting action was successful.");
-                    }
-                })
-            }
-        }
-    })
 }
-
-$("#exampleModal").on("hidden.bs.modal", function () {
-    $('#modal-content').html("");
-});
 
 function showMovieDetails(data) {
     $('#modal-content').append(
         '<div>' +
-            '<div id="modal-movie-picture">' +
-            // '<img' + ' src=' + 'width="120px" id="modal-movie-picture">' +
-            '</div>' +
-            '<div id="modal-movie-data">' +
-                '<div>' + data.title + '</div>' +
-                '<div>' + data.releaseDate + '</div>' +
-            '</div>' +
-            '<div id="modal-movie-description">' + ((data.description === null) ? "No description provided" : data.description) + '</div>' +
-            '<button type="button" class="btn btn-info" id="btn-rent-movie" data-movie-id="' + data.id + '">Rent</button> ' +
+        '<div id="modal-movie-picture">' +
+        // '<img' + ' src=' + 'width="120px" id="modal-movie-picture">' +
+        '</div>' +
+        '<div id="modal-movie-data">' +
+        '<div>' + data.title + '</div>' +
+        '<div>' + data.releaseDate + '</div>' +
+        '</div>' +
+        '<div id="modal-movie-description">' + ((data.description === null) ? "No description provided" : data.description) + '</div>' +
+        '<button type="button" class="btn btn-info" id="btn-rent-movie" data-movie-id="' + data.id + '">Rent</button> ' +
         '</div>'
     );
 
@@ -64,5 +47,29 @@ function showMovieDetails(data) {
     $("#exampleModal").modal("show");
 
 }
+
+function evalRentAction(movieId){
+    $.ajax({
+        type: 'POST',
+        url: '/logged-in-user-id',
+        success: function (userId) {
+            if (userId === "0"){
+                $('#modal-login-message').html("To do a rent please log in or register!");
+                $('#loginModal').modal('show');
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: '/rent-movie',
+                    data: {'userId': userId, 'movieId' : movieId},
+                    success: function () {
+                        console.log("Renting action was successful.");
+                    }
+                })
+            }
+        }
+    })
+
+}
+
 
 
