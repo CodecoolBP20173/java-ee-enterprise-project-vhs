@@ -14,13 +14,49 @@ public class LoginFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpSession session = ((HttpServletRequest) request).getSession();
-        if (Integer.parseInt(session.getAttribute("userId").toString()) ==
-                (Integer.parseInt(((HttpServletRequest) request).getPathInfo().split("/")[1]))) {
-            chain.doFilter(request, response);
+
+        HttpServletRequest httpRequest = ((HttpServletRequest) request);
+        HttpServletResponse httpResponse = ((HttpServletResponse) response);
+
+        HttpSession session = httpRequest.getSession();
+
+        if (anyUserLoggedIn(session)) {
+            String userId = session.getAttribute("userId").toString();
+            if (httpRequest.getPathInfo() == null) {
+                System.out.println("No user ID was given!");
+                httpResponse.sendRedirect("/");
+            } else {
+                String[] path = httpRequest.getPathInfo().split("/");
+                String requestUserId = (path.length > 0) ? path[1] : "";
+
+                if (validUserId(userId) && sameUser(userId, requestUserId)) {
+                    chain.doFilter(request, response);
+                } else {
+                    System.out.println("User IDs are not matching or not valid user ID!");
+                    httpResponse.sendRedirect("/");
+                }
+            }
         } else {
-            ((HttpServletResponse) response).sendRedirect("/");
+            System.out.println("No user logged in!");
+            httpResponse.sendRedirect("/");
         }
+    }
+
+    private boolean anyUserLoggedIn(HttpSession session) {
+        return (session.getAttribute("userId") != null);
+    }
+
+    private boolean sameUser(String userId, String requestUserId) {
+        return userId.equals(requestUserId);
+    }
+
+    private boolean validUserId(String userId) {
+        try {
+            Integer.parseInt(userId);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 
     @Override
