@@ -20,7 +20,7 @@
     background-color: #0c5460;
 }
 
-.modal-content {
+.modal-movie-content {
     padding: 0;
     background-image: url("/static/img/vhs_bg.png");
     background-color: #343a40 !important;
@@ -81,7 +81,7 @@
     /*height: calc(var(--modal-height) + 600px);*/
 }
 
-.modal-content > * {
+.modal-movie-content > * {
     background: none transparent;
 }
 

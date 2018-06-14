@@ -76,7 +76,7 @@
                             <tbody>
                                 <th:block th:each="rental : ${user.getRentals()}">
                                     <tr>
-                                        <td th:value="${rental.getId()}">00</td>
+                                        <td th:text="${rental.getId()}">00</td>
                                         <td>
                                             <ul>
                                             <th:block th:each="casette : ${rental.getCassette()}">

@@ -1,5 +1,5 @@
-$("#exampleModal").on("hidden.bs.modal", function () {
-    $('#modal-content').html("");
+$("#movieModal").on("hidden.bs.modal", function () {
+    $('#modal-movie-content').html("");
 });
 $("#loginModal").on("hidden.bs.modal", function () {
     $('#modal-login-message').html("");
@@ -22,7 +22,7 @@ function populateModal(id) {
 }
 
 function showMovieDetails(data) {
-    $('#modal-content').append(
+    $('#modal-movie-content').append(
         '<div>' +
         '<div id="modal-movie-picture">' +
         // '<img' + ' src=' + 'width="120px" id="modal-movie-picture">' +
@@ -40,11 +40,11 @@ function showMovieDetails(data) {
 
     $('#btn-rent-movie').on('click', function () {
         let movie_id = $(this).data("movie-id");
-        $('#exampleModal').modal('hide');
+        $('#movieModal').modal('hide');
         evalRentAction(movie_id);
     });
 
-    $("#exampleModal").modal("show");
+    $("#movieModal").modal("show");
 
 }
 
