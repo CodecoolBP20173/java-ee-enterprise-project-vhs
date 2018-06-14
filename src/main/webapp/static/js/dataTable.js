@@ -1,28 +1,28 @@
 $(document).ready(function () {
+    $("#accessDenied").show();
     let firstCarouselItem = $('.carousel-item:first');
     firstCarouselItem.addClass('active');
-    $('#movies_list').DataTable();
 
-    replaceSearchBar();
+    initDataTable();
     onSort();
     setupRows();
-
 });
 
-function replaceSearchBar() {
-    let searchBar = $('label:last');
-    let toReplace = $('#searchReplace');
-    toReplace.replaceWith(searchBar);
-    document.getElementsByTagName("input")[0].addEventListener("click", function () {
+function initDataTable() {
+    $('#movies_list').DataTable();
+    $('#movies_list').on( 'draw.dt', function () {
+        setupRows();
         $('#jumbo').hide('slow');
-    });
+    } );
 }
+
 
 function onSort() {
     let rows = document.getElementsByTagName("tr");
     rows[0].addEventListener("click", function () {
         setupRows();
-    })
+    });
+
 }
 
 function setupRows() {
@@ -40,7 +40,6 @@ function setupRows() {
             rows[i].style.backgroundColor = "#343a40";
             rows[i].style.color = "white";
         });
-
         rows[i].addEventListener("click", function (e) {
             rows[i].getAttribute("id");
             populateModal(e.target.parentNode.getAttribute("id"));
@@ -49,3 +48,4 @@ function setupRows() {
         })
     }
 }
+

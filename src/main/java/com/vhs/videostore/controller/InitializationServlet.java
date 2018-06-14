@@ -24,6 +24,7 @@ public class InitializationServlet extends HttpServlet {
         Login login = new Login(userPageService);
         Registration registration = new Registration(userPageService);
         Renting renting = new Renting(rentalService);
+        Logout logout = new Logout();
 
         getServletContext().setAttribute("mainPage", mainPage);
         getServletContext().setAttribute("movieDetail", movieDetail);
@@ -31,7 +32,7 @@ public class InitializationServlet extends HttpServlet {
         getServletContext().setAttribute("login", login);
         getServletContext().setAttribute("registration", registration);
         getServletContext().setAttribute("renting", renting);
-
+        getServletContext().setAttribute("logout", logout);
 
 
     }

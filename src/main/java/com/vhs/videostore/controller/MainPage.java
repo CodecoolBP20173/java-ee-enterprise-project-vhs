@@ -8,6 +8,7 @@ import com.vhs.videostore.services.MainPageService;
 import com.vhs.videostore.model.SpecialOffer;
 
 import javax.persistence.*;
+import javax.rmi.CORBA.Util;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,20 +36,8 @@ public class MainPage extends HttpServlet {
         List<Movie> movies = mainPageService.getAllMovies();
         List<SpecialOffer> specialOffers = mainPageService.getAllSpecialOffers();
 
-        // LOGIN user from SESSION
-        HttpSession session = req.getSession();
-        if (session.getAttribute("loggedIn") != null){
-            boolean isLoggedIn = (boolean) session.getAttribute("loggedIn");
-            if(isLoggedIn){
-                context.setVariable("loggedIn", true);
-                User user = (User)session.getAttribute("user");
-                context.setVariable("user", user);
-            }else {
-                context.setVariable("loggedIn", false);
-            }
-        }else {
-            context.setVariable("loggedIn", false);
-        }
+        context = Utility.loginFromSession(context, req);
+
         context.setVariable("movies", movies);
         context.setVariable("specialOffers", specialOffers);
 

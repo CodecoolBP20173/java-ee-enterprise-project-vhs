@@ -1,5 +1,5 @@
 .crop {
-    width: 120%;
+    width: 900px;
     height: 400px;
     overflow: hidden;
     padding-bottom: 30px;
@@ -42,4 +42,9 @@ body {
     background-repeat: repeat-x;
     background-size: contain;
     height: 100px;
+}
+
+.navbar-toggler {
+    border-color: lightblue;
+
 }
