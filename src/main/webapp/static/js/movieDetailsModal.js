@@ -32,7 +32,7 @@ function showMovieDetails(data) {
         '<div>' + data.releaseDate + '</div>' +
         '</div>' +
         '<div id="modal-movie-description">' + ((data.description === null) ? "No description provided" : data.description) + '</div>' +
-        '<button type="button" class="btn btn-info" id="btn-rent-movie" data-movie-id="' + data.id + '">Rent</button> ' +
+        '<button type="button" class="btn btn-info rent" id="btn-rent-movie" data-movie-id="' + data.id + '">Rent</button> ' +
         '</div>'
     );
 
@@ -54,7 +54,7 @@ function evalRentAction(movieId){
         url: '/logged-in-user-id',
         success: function (userId) {
             if (userId === "0"){
-                $('#modal-login-message').html("To do a rent please log in or register!");
+                $('#modal-login-message').html("In order to make a rent please log in or register!");
                 $('#loginModal').modal('show');
             } else {
                 $.ajax({

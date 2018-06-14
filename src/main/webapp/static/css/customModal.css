@@ -16,10 +16,6 @@
     max-height: 600px;
 }
 
-.modal-content-simple {
-    background-color: #0c5460;
-}
-
 .modal-movie-content {
     padding: 0;
     background-image: url("/static/img/vhs_bg.png");
@@ -86,7 +82,58 @@
 }
 
 #btn-rent-movie {
-    position: fixed;
-    bottom: 0;
-    right: 0;
+    z-index: 9999;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 80px;
+}
+
+
+/* /////////////////// Login & Registration ///////////////// */
+
+.modal-content {
+    background-color: #017bff;
+    color: whitesmoke;
+}
+
+.login, .rent, .register {
+    background-color: #343a40;
+    border-color: #34ce57;
+    color: whitesmoke;
+}
+
+.login:hover, .rent:hover, .register:hover {
+    background-color: #34ce57;
+    border-color: #34ce57;
+    color: whitesmoke;
+}
+
+/*.text-muted {*/
+    /*color: #343a40 !important;*/
+/*}*/
+
+#modal-login-message {
+    margin: 10px 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+
+    color: white;
+
+    animation-name: flash;
+    animation-duration: 3s;
+
+    text-align: center;
+}
+
+@keyframes flash {
+    0% { background-color: transparent }
+
+    50% { background-color: red }
+
+    100% { background-color: transparent }
+}
+
+.modal-body {
+    background-color: #343a40;
 }
