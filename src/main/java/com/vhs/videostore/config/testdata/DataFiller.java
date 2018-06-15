@@ -25,12 +25,28 @@ public class DataFiller {
         Movie movie3 = new Movie("One flew over the cuckoo's nest", 2000,  4, tagList3);
         Movie movie4 = new Movie("Clueless", 1992, 32, tagList4);
 
+        Cassette cassette2= new Cassette();
+        cassette2.setMovie(movie1);
+        Cassette cassette3= new Cassette();
+        cassette3.setMovie(movie2);
+        Cassette cassette4= new Cassette();
+        cassette4.setMovie(movie3);
+        Cassette cassette5= new Cassette();
+        cassette5.setMovie(movie4);
+
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         em.persist(movie1);
         em.persist(movie2);
         em.persist(movie3);
         em.persist(movie4);
+        transaction.commit();
+
+        transaction.begin();
+        em.persist(cassette2);
+        em.persist(cassette3);
+        em.persist(cassette4);
+        em.persist(cassette5);
         transaction.commit();
     }
 
