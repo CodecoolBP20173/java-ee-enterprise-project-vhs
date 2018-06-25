@@ -1,6 +1,9 @@
 package com.vhs.videostore.controller;
 
 import com.vhs.videostore.model.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import com.vhs.videostore.services.MainPageService;
@@ -14,7 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class MainPage extends HttpServlet {
+@Controller
+public class MainPage{
 
     private MainPageService mainPageService;
 
@@ -22,31 +26,22 @@ public class MainPage extends HttpServlet {
         this.mainPageService = mainPageService;
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-        WebContext context = new WebContext(req, resp, req.getServletContext());
+    @GetMapping(value = "/")
+    public String mainUI(Model model) {
 
         List<Movie> movies = mainPageService.getAllMovies();
         List<SpecialOffer> specialOffers = mainPageService.getAllSpecialOffers();
 
-        context = Utility.loginFromSession(context, req);
+        //context = Utility.loginFromSession(context, req);
 
-        context.setVariable("movies", movies);
-        context.setVariable("specialOffers", specialOffers);
+        saveObjectToModel(model, "movies", movies);
+        saveObjectToModel(model, "specialOffers", specialOffers);
 
-        try {
-            engine.process("index.html", context, resp.getWriter());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return "index";
     }
 
-    public MainPageService getMainPageService() {
-        return mainPageService;
+    private void saveObjectToModel(Model model, String key, Object value) {
+        model.addAttribute(key, value);
     }
 
-    public void setMainPageService(MainPageService mainPageService) {
-        this.mainPageService = mainPageService;
-    }
 }
