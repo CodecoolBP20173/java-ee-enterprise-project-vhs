@@ -3,7 +3,10 @@ package com.vhs.videostore.services;
 import com.vhs.videostore.model.Movie;
 import com.vhs.videostore.model.SpecialOffer;
 import com.vhs.videostore.model.User;
+import com.vhs.videostore.repository.*;
 import org.omg.CORBA.TIMEOUT;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -19,36 +22,29 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class MainPageService {
 
-    private EntityManager em;
+    private MovieRepository movieRepository;
+    private SpecialOfferRepository specialOfferRepository;
+    private UserRepository userRepository;
 
-    public MainPageService(EntityManager em) {
-        this.em = em;
+    public MainPageService(MovieRepository movieRepository, SpecialOfferRepository specialOfferRepository, UserRepository userRepository) {
+        this.movieRepository = movieRepository;
+        this.specialOfferRepository = specialOfferRepository;
+        this.userRepository = userRepository;
     }
 
     public List<Movie> getAllMovies(){
-        List<Movie> movies = em.createQuery("SELECT m FROM Movie m", Movie.class).getResultList();
-        return movies;
+        return movieRepository.findAll();
     }
 
     public List<SpecialOffer> getAllSpecialOffers(){
+        return specialOfferRepository.findAll();
 
-        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        TypedQuery<SpecialOffer> query = em.createQuery("SELECT s FROM SpecialOffer s" +
-                " WHERE s.toDate >= :currentTime", SpecialOffer.class);
-        return query.setParameter("currentTime", currentTime).getResultList();
     }
 
-    public User getUserById(Integer id) {
-        try {
-            TypedQuery<User> query = em.createQuery(
-                    "SELECT u FROM User u WHERE u.id = :id", User.class
-            );
-            query.setParameter("id", id);
-            return query.getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
+    public User findById(int id) {
+        return userRepository.getOne(id);
     }
 }
