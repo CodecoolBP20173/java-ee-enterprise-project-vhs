@@ -116,3 +116,6 @@ buildNumber.properties
 src/main/resources/META-INF/persistence.xml
 
 *.properties
+
+*.ddl
+
