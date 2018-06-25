@@ -1,20 +1,22 @@
-package com.vhs.videostore.config.testdata;
+package com.vhs.videostore.testdata;
 
 import com.vhs.videostore.model.*;
+import com.vhs.videostore.services.MovieDetailService;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.*;
 
-public class DataFiller {
+@Component
+public class InitializerBean {
 
-    private EntityManager em;
 
-    public DataFiller(EntityManager em) {
-        this.em = em;
+    public InitializerBean(MovieDetailService movieDetailService) {
+        fillMoviesTable(movieDetailService);
     }
 
-    public void fillMoviesTable(){
+    public void fillMoviesTable(MovieDetailService movieDetailService){
         List<Tag> tagList1 = new ArrayList<>(Arrays.asList(Tag.COMEDY, Tag.ROMANCE));
         List<Tag> tagList2 = new ArrayList<>(Arrays.asList(Tag.NATURE, Tag.CULTURE, Tag.SUPERHERO));
         List<Tag> tagList3 = new ArrayList<>(Arrays.asList(Tag.NATURE, Tag.SUPERHERO));
@@ -25,7 +27,9 @@ public class DataFiller {
         Movie movie3 = new Movie("One flew over the cuckoo's nest", 2000,  4, tagList3);
         Movie movie4 = new Movie("Clueless", 1992, 32, tagList4);
 
-        Cassette cassette2= new Cassette();
+        movieDetailService.add(movie1, movie2, movie3, movie4);
+
+        /*Cassette cassette2= new Cassette();
         cassette2.setMovie(movie1);
         Cassette cassette3= new Cassette();
         cassette3.setMovie(movie2);
@@ -47,10 +51,10 @@ public class DataFiller {
         em.persist(cassette3);
         em.persist(cassette4);
         em.persist(cassette5);
-        transaction.commit();
+        transaction.commit();*/
     }
 
-    public void fillSpecialOffersTable() {
+    /*public void fillSpecialOffersTable() {
         List<Tag> tagList1 = new ArrayList<>(Arrays.asList(Tag.COMEDY, Tag.ROMANCE));
         List<Tag> tagList2 = new ArrayList<>(Arrays.asList(Tag.NATURE, Tag.CULTURE, Tag.SUPERHERO));
         List<Tag> tagList3 = new ArrayList<>(Arrays.asList(Tag.NATURE, Tag.SUPERHERO));
@@ -131,5 +135,5 @@ public class DataFiller {
         em.persist(sampleUser);
 
         transaction.commit();
-    }
+    }*/
 }

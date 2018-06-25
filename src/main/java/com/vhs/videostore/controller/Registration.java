@@ -1,6 +1,5 @@
 package com.vhs.videostore.controller;
 
-import com.vhs.videostore.config.TemplateEngineUtil;
 import com.vhs.videostore.model.User;
 import com.vhs.videostore.services.UserPageService;
 import org.thymeleaf.TemplateEngine;

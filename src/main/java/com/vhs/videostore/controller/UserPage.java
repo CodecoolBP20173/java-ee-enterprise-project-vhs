@@ -1,9 +1,5 @@
 package com.vhs.videostore.controller;
 
-import com.vhs.videostore.config.TemplateEngineUtil;
-import com.vhs.videostore.model.Cassette;
-import com.vhs.videostore.model.Movie;
-import com.vhs.videostore.model.Rental;
 import com.vhs.videostore.model.User;
 import com.vhs.videostore.services.UserPageService;
 import org.thymeleaf.TemplateEngine;
@@ -11,13 +7,10 @@ import org.thymeleaf.context.WebContext;
 
 import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserPage extends HttpServlet {
 

@@ -16,4 +16,6 @@ public class MovieDetailService {
         return em.find(Movie.class, id);
     }
 
+    public void add(Movie ...movies) {
+    }
 }
