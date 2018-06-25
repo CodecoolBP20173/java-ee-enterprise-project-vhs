@@ -1,21 +1,42 @@
 package com.vhs.videostore.services;
 
 import com.vhs.videostore.model.Movie;
+import com.vhs.videostore.repository.MovieRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
+import java.util.List;
 
+@Service
 public class MovieDetailService {
 
-    private EntityManager em;
+    @Autowired
+    private MovieRepository movieRepository;
 
-    public MovieDetailService(EntityManager em) {
-        this.em = em;
+    public List<Movie> findAll() {
+        return movieRepository.findAll();
     }
 
-    public  Movie getSingleMovie(int id){
-        return em.find(Movie.class, id);
+    public Movie findById(Long id) {
+        return movieRepository.getOne(id);
     }
 
-    public void add(Movie ...movies) {
+    public void deleteAll() {
+        movieRepository.deleteAll();
+    }
+
+    public void saveMOvie(Movie entity) {
+        movieRepository.save(entity);
+    }
+
+    public void updateMovie(Long id, String title) {
+        Movie movie = movieRepository.getOne(id);
+        movie.setTitle(title);
+        movieRepository.save(movie);
+    }
+
+    public void deleteById(Long id) {
+        Movie movie = movieRepository.getOne(id);
+        movieRepository.delete(movie);
     }
 }
