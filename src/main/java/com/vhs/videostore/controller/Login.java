@@ -1,26 +1,14 @@
 package com.vhs.videostore.controller;
 
-import com.vhs.videostore.model.User;
 import com.vhs.videostore.services.UserPageService;
-import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.WebContext;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import org.springframework.stereotype.Controller;
 
 
 @Controller
-@Scope("session")
-public class Login extends HttpServlet {
+public class Login {
 
     private UserPageService userPageService;
 
