@@ -5,7 +5,9 @@ import com.vhs.videostore.model.Movie;
 import com.vhs.videostore.model.Rental;
 import com.vhs.videostore.model.User;
 import com.vhs.videostore.repository.CassetteRepository;
+import com.vhs.videostore.repository.MovieRepository;
 import com.vhs.videostore.repository.RentalRepository;
+import com.vhs.videostore.repository.UserRepository;
 import org.hibernate.Session;
 import org.springframework.stereotype.Service;
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieDetailService {
@@ -17,8 +18,8 @@ public class MovieDetailService {
         return movieRepository.findAll();
     }
 
-    public Movie findById(Long id) {
-        return movieRepository.getOne(id);
+    public Optional<Movie> findById(int id) {
+        return movieRepository.findById(id);
     }
 
     public void deleteAll() {
@@ -29,13 +30,13 @@ public class MovieDetailService {
         movieRepository.save(entity);
     }
 
-    public void updateMovie(Long id, String title) {
+    public void updateMovie(int id, String title) {
         Movie movie = movieRepository.getOne(id);
         movie.setTitle(title);
         movieRepository.save(movie);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(int id) {
         Movie movie = movieRepository.getOne(id);
         movieRepository.delete(movie);
     }
