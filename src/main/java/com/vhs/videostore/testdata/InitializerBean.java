@@ -1,9 +1,12 @@
 package com.vhs.videostore.testdata;
 
 import com.vhs.videostore.model.*;
+import com.vhs.videostore.repository.CassetteRepository;
 import com.vhs.videostore.services.MovieDetailService;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.*;
@@ -11,12 +14,11 @@ import java.util.*;
 @Component
 public class InitializerBean {
 
-
-    public InitializerBean(MovieDetailService movieDetailService) {
-        fillMoviesTable(movieDetailService);
+    public InitializerBean(MovieDetailService movieDetailService, CassetteRepository cassetteRepository) {
+        fillMoviesTable(movieDetailService, cassetteRepository);
     }
 
-    public void fillMoviesTable(MovieDetailService movieDetailService){
+    public void fillMoviesTable(MovieDetailService movieDetailService, CassetteRepository cassetteRepository){
         List<Tag> tagList1 = new ArrayList<>(Arrays.asList(Tag.COMEDY, Tag.ROMANCE));
         List<Tag> tagList2 = new ArrayList<>(Arrays.asList(Tag.NATURE, Tag.CULTURE, Tag.SUPERHERO));
         List<Tag> tagList3 = new ArrayList<>(Arrays.asList(Tag.NATURE, Tag.SUPERHERO));
@@ -27,32 +29,26 @@ public class InitializerBean {
         Movie movie3 = new Movie("One flew over the cuckoo's nest", 2000,  4, tagList3);
         Movie movie4 = new Movie("Clueless", 1992, 32, tagList4);
 
-        movieDetailService.add(movie1, movie2, movie3, movie4);
+        movieDetailService.saveMOvie(movie1);
+        movieDetailService.saveMOvie(movie2);
+        movieDetailService.saveMOvie(movie3);
+        movieDetailService.saveMOvie(movie4);
 
-        /*Cassette cassette2= new Cassette();
-        cassette2.setMovie(movie1);
+        Cassette cassette1= new Cassette();
+        cassette1.setMovie(movie1);
+        Cassette cassette2= new Cassette();
+        cassette2.setMovie(movie2);
         Cassette cassette3= new Cassette();
-        cassette3.setMovie(movie2);
+        cassette3.setMovie(movie3);
         Cassette cassette4= new Cassette();
-        cassette4.setMovie(movie3);
-        Cassette cassette5= new Cassette();
-        cassette5.setMovie(movie4);
+        cassette4.setMovie(movie4);
 
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        em.persist(movie1);
-        em.persist(movie2);
-        em.persist(movie3);
-        em.persist(movie4);
-        transaction.commit();
-
-        transaction.begin();
-        em.persist(cassette2);
-        em.persist(cassette3);
-        em.persist(cassette4);
-        em.persist(cassette5);
-        transaction.commit();*/
+        cassetteRepository.save(cassette1);
+        cassetteRepository.save(cassette2);
+        cassetteRepository.save(cassette3);
+        cassetteRepository.save(cassette4);
     }
+
 
     /*public void fillSpecialOffersTable() {
         List<Tag> tagList1 = new ArrayList<>(Arrays.asList(Tag.COMEDY, Tag.ROMANCE));
