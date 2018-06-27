@@ -27,18 +27,4 @@ public class UserPage {
 
         return "userpage";
     }
-
-
-//    private boolean wrongPath(String path) {
-//        if (path == null) return true;
-//
-//        String[] pathParams = path.split("/");
-//        try {
-//            Integer.parseInt(pathParams[1]);
-//            return pathParams.length != 2;
-//        } catch (NumberFormatException e) {
-////            e.printStackTrace();
-//            return true;
-//        }
-//    }
 }
