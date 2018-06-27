@@ -17,7 +17,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -31,13 +33,16 @@ public class MainPage{
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    protected String home(final Map<String, Object> model, final HttpServletRequest req, Model thModel) {
-        String accessToken = (String) SessionUtils.get(req, "accessToken");
-        String idToken = (String) SessionUtils.get(req, "idToken");
-        if (accessToken != null) {
-            model.put("userId", accessToken);
-        } else if (idToken != null) {
-            model.put("userId", idToken);
+    protected String home(Model thModel, final Principal principal, HttpServletRequest req) {
+        if (principal != null) {
+            String userId = principal.getName().split("\\|")[1].trim();
+            saveObjectToModel(thModel, "userId", userId);
+
+            // TODO: I recommend to see this SessionUtils class, it can do what we wanted to achieve with Utility.loginFromSession
+            SessionUtils.set(req, "userId", userId);
+
+            // Just to show that to userID is in the session
+            System.out.println("Logged in UserID in Session: " + req.getSession().getAttribute("userId"));
         }
 
         List<Movie> movies = mainPageService.getAllMovies();
