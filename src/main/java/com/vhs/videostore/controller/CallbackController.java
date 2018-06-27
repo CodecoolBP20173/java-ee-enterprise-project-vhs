@@ -1,14 +1,8 @@
 package com.vhs.videostore.controller;
 
 import com.auth0.IdentityVerificationException;
-import com.auth0.SessionUtils;
 import com.auth0.Tokens;
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.auth0.jwt.interfaces.DecodedJWT;
-import com.auth0.jwt.interfaces.RSAKeyProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -19,8 +13,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
+
+
+
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Controller
 public class CallbackController {
@@ -45,49 +42,24 @@ public class CallbackController {
         handle(req, res);
     }
 
-    protected void handle(final HttpServletRequest req, final HttpServletResponse res) throws ServletException, IOException {
+    protected void handle(final HttpServletRequest req, final HttpServletResponse res) throws ServletException, IOException  {
         try {
             Tokens tokens = controller.handle(req);
-            SessionUtils.set(req, "accessToken", tokens.getAccessToken());
-            SessionUtils.set(req, "idToken", tokens.getIdToken());
-            String token = tokens.getIdToken();
-            final JwkStore jwkStore = new JwkStore("{JWKS_FILE_HOST}");
-            final RSAPrivateKey privateKey = null;//Get the key instance
-            final String privateKeyId = null;//Create an Id for the above key
+            TokenAuthentication tokenAuth = new TokenAuthentication(JWT.decode(tokens.getIdToken()));
 
-            RSAKeyProvider keyProvider = new RSAKeyProvider() {
-                @Override
-                public RSAPublicKey getPublicKeyById(String kid) {
-                    //Received 'kid' value might be null if it wasn't defined in the Token's header
-                    RSAPublicKey publicKey = jwkStore.get(kid);
-                    return (RSAPublicKey) publicKey;
-                }
+            System.out.println("Token subject: " + tokenAuth.getName());
+            String userId = tokenAuth
+                    .getName()
+                    .split("\\|")[1]
+                    .trim();
+            System.out.println("User id: " + userId);
 
-                @Override
-                public RSAPrivateKey getPrivateKey() {
-                    return privateKey;
-                }
-
-                @Override
-                public String getPrivateKeyId() {
-                    return privateKeyId;
-                }
-            };
-            RSAPublicKey publicKey = null;//Get the key instance
-            RSAPrivateKey privateKey = null; //Get the key instance
-            try {
-                Algorithm algorithm = Algorithm.RSA256(publicKey, privateKey);
-                JWTVerifier verifier = JWT.require(algorithm)
-                        .withIssuer("auth0")
-                        .build(); //Reusable verifier instance
-                DecodedJWT jwt = verifier.verify(token);
-                System.out.println(jwt.getSubject());
-            } catch (JWTVerificationException exception) {
-                //Invalid signature/claims
-            }
-            res.sendRedirect("/");
-        } catch (IdentityVerificationException e) {
-            res.sendRedirect("/login");
+            SecurityContextHolder.getContext().setAuthentication(tokenAuth);
+            res.sendRedirect(redirectOnSuccess);
+        } catch (AuthenticationException | IdentityVerificationException e) {
+            e.printStackTrace();
+            SecurityContextHolder.clearContext();
+            res.sendRedirect(redirectOnFail);
         }
     }
 
