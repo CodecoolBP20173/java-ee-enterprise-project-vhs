@@ -1,17 +1,15 @@
-package com.vhs.videostore.services;
+package java.com.vhs.videostore.services;
 
 import com.vhs.videostore.model.Movie;
 import com.vhs.videostore.model.SpecialOffer;
 import com.vhs.videostore.repository.MovieRepository;
 import com.vhs.videostore.repository.SpecialOfferRepository;
+import com.vhs.videostore.services.MainPageService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
