@@ -29,7 +29,6 @@ public class RentalService {
             CassetteRepository cassetteRepository
     ) {
         this.rentalRepository = rentalRepository;
-//        this.userRepository = userRepository;
         this.movieRepository = movieRepository;
         this.cassetteRepository = cassetteRepository;
     }
@@ -40,7 +39,6 @@ public class RentalService {
         Cassette cassette = cassetteRepository.findByMovie(movie);
         Rental rental = new Rental(userId, cassette, 20180615, 20180618);
         rentalRepository.save(rental);
-        System.out.println(cassette.getMovie().getTitle() + " cassette rental is saved to DB...");
     }
 
     public List<Rental> findRentalsByUserId(String userId){
