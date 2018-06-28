@@ -1,7 +1,5 @@
 package com.vhs.videostore.model;
 
-import com.vhs.videostore.model.User;
-
 import javax.persistence.*;
 
 @Entity
@@ -15,18 +13,17 @@ public class Employee {
     private int id;
     @Enumerated(EnumType.STRING)
     private accessLevel accessRight;
-    @OneToOne
-    private User user;
+    private String userId;
     private int salary;
 
     enum accessLevel {
         VISITOR, USER, MODERATOR, ADMIN;
     }
 
-    public Employee(accessLevel accessRight, User user, int salary) {
+    public Employee(accessLevel accessRight, String userId, int salary) {
         this.accessRight = accessRight;
-        this.user = user;
         this.salary = salary;
+        this.userId = userId;
     }
 
     public int getId() {
@@ -45,12 +42,12 @@ public class Employee {
         this.accessRight = accessRight;
     }
 
-    public User getUser() {
-        return user;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public int getSalary() {

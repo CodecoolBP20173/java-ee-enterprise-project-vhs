@@ -10,8 +10,7 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    private User owner;
+    private String userId;
 
     @ManyToOne
     private Movie movie;
@@ -24,16 +23,16 @@ public class Review {
 
     public Review() {}
 
-    public Review(User owner, String text, int rating) {
-        this.owner = owner;
+    public Review(String userId, String text, int rating) {
+        this.userId = userId;
         this.reviewText = text;
         this.timestamp = System.currentTimeMillis();
         this.rating = rating;
         this.moderated = false;
     }
 
-    public Review(User owner, int rating) {
-        this(owner, "", rating);
+    public Review(String userId, int rating) {
+        this(userId, "", rating);
     }
 
     public int getId() {
@@ -44,12 +43,12 @@ public class Review {
         this.id = id;
     }
 
-    public User getOwner() {
-        return owner;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getReviewText() {

@@ -14,11 +14,11 @@ public class Logout{
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
     protected String logout(final HttpServletRequest req) {
         logger.debug("Performing logout");
         invalidateSession(req);
-        return "redirect:" + req.getContextPath() + "/login";
+        return "redirect:" + req.getContextPath() + "/";
     }
 
     private void invalidateSession(HttpServletRequest request) {
@@ -26,5 +26,4 @@ public class Logout{
             request.getSession().invalidate();
         }
     }
-
 }

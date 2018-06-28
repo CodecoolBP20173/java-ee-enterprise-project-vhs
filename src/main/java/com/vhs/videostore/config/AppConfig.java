@@ -44,7 +44,6 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
@@ -52,7 +51,10 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/rent-movie").authenticated()
                 .antMatchers("/user/**").authenticated()
                 .and()
-                .logout().permitAll();
+                .logout()
+                .permitAll()
+                .logoutSuccessUrl("/");
+
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER);
     }
 

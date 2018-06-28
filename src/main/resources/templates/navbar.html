@@ -11,35 +11,48 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item" id="loginButton">
-                    <button type="button" class="btn btn-outline-primary my-2 my-sm-2" data-toggle="modal"
-                            data-target="#loginModal">
-                        Login
-                    </button>
+                <li
+                        class="nav-item"
+                        id="loginButton"
+                        th:if="${!loggedIn}"
+                >
+                    <form action="/login" method="get">
+                        <button type="submit" class="btn btn-outline-primary my-2 my-sm-2">
+                            Login
+                        </button>
+                    </form>
                 </li>
-                <li class="nav-item" id="registerButton">
-                    <button type="button" class="btn btn-outline-primary my-2 my-sm-2" data-toggle="modal"
-                            data-target="#registrationModal">
-                        Register
-                    </button>
+                <li
+                        class="nav-item"
+                        id="registerButton"
+                        th:if="${!loggedIn}"
+                >
+                    <form action="/login" method="get">
+                        <button type="submit" class="btn btn-outline-primary my-2 my-sm-2">
+                            Register
+                        </button>
+                    </form>
                 </li>
             </ul>
             <div id="logLabel">
-            <!--<span
+            <span
                     th:if="${!loggedIn}"
                     class="navbar-text"
                     th:text="'You are not logged in'"
-            ></span>-->
-                <!--<a
+            ></span>
+                <a
                         class="btn btn-primary btn-sm"
-                        th:href="'/user/' + ${user.getId()}"
+                        th:href="'/user/' + ${userId}"
                         th:if="${loggedIn}"
-                        th:text="${user.getName()}+ '\'s profile'"
-                ></a>-->
+                        th:text="'Go to profile...'"
+                ></a>
             </div>
-            <div id="logoutButton">
-                <form action="/logout" method="post" class="form-inline my-2 my-lg-2 ml-2">
-                    <button class="btn btn-outline-primary my-2 my-sm-0">
+            <div
+                    id="logoutButton"
+                    th:if="${loggedIn}"
+            >
+                <form action="/logout" method="get" class="form-inline my-2 my-lg-2 ml-2">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
                         Logout
                     </button>
                 </form>

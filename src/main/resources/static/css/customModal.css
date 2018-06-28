@@ -18,7 +18,7 @@
 
 .modal-movie-content {
     padding: 0;
-    background-image: url("/static/img/vhs_bg.png");
+    background-image: url("/img/vhs_bg.png");
     background-color: #343a40 !important;
     background-size: contain;
     height: 440px;

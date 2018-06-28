@@ -7,14 +7,13 @@
 
 
     <!-- TODO To import in every html-->
-    <link rel="stylesheet" type="text/css" href="/static/DataTables/datatables.css">
-    <script type="text/javascript" charset="utf8" src="/static/DataTables/datatables.js"></script>
-    <script type="text/javascript" src="/static/js/navBar.js" rel="script"></script>
+    <link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
+    <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/customUser.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/customUser.css">
 
     <title>VHS Store | Profile</title>
 </head>
@@ -23,36 +22,24 @@
     <div class="container" id="user">
         <div id="main-content">
             <div class="row">
-                <h1 th:text="${user.getName()} + ' | Profile' "></h1>
+                <h1 th:text="'| Profile |' "></h1>
             </div>
             <div class="row">
                 <div id="user-profile">
                     <div id="user-picture">
-                        <img src="http://placehold.it/200x200/000/fff" th:attr="src='/static/img/default_user.jpg'" width="200px" height="200px"/>
+                        <img src="http://placehold.it/200x200/000/fff" th:attr="src='/img/default_user.jpg'" width="200px" height="200px"/>
                     </div>
                     <div id="user-details">
                         <div>
                             <label for="user-id">ID</label>
-                            <span id="user-id" th:text="${user.getId()}">00</span>
-                        </div>
-                        <div>
-                            <label for="user-name">USERNAME</label>
-                            <span id="user-name" th:text="${user.getName()}">John Doe</span>
-                        </div>
-                        <div>
-                            <label for="user-email">EMAIL</label>
-                            <span id="user-email" th:text="${user.getEmail()}">contact@vhs.com</span>
-                        </div>
-                        <div hidden>
-                            <label for="user-pwd">PASSWORD</label>
-                            <input id="user-pwd" type="password" disabled th:text="${user.getPwd()}" />
+                            <span id="user-id" th:text="${userId}">00</span>
                         </div>
                     </div>
                 </div>
 
                 <div id="user-rental-history">
                     <h2>Rental history</h2>
-                    <div id="user-rentals" th:switch="${user.getRentals().size()}">
+                    <div id="user-rentals" th:switch="${rentals.size()}">
                         <div th:case="0">
                             There were no rentals before!
                         </div>
@@ -74,7 +61,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <th:block th:each="rental : ${user.getRentals()}">
+                                <th:block th:each="rental : ${rentals}">
                                     <tr>
                                         <td th:text="${rental.getId()}">00</td>
                                         <td>

@@ -3,7 +3,6 @@ package com.vhs.videostore.testdata;
 import com.vhs.videostore.model.*;
 import com.vhs.videostore.repository.CassetteRepository;
 import com.vhs.videostore.services.MovieDetailService;
-import com.vhs.videostore.services.UserPageService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -15,9 +14,9 @@ import java.util.*;
 @Component
 public class InitializerBean {
 
-    public InitializerBean(MovieDetailService movieDetailService, CassetteRepository cassetteRepository, UserPageService ups) {
+    public InitializerBean(MovieDetailService movieDetailService, CassetteRepository cassetteRepository) {
         fillMoviesTable(movieDetailService, cassetteRepository);
-        fillUserTable(ups);
+//        fillUserTable(ups);
     }
 
     public void fillMoviesTable(MovieDetailService movieDetailService, CassetteRepository cassetteRepository){
@@ -49,6 +48,8 @@ public class InitializerBean {
         cassetteRepository.save(cassette2);
         cassetteRepository.save(cassette3);
         cassetteRepository.save(cassette4);
+
+        Rental rental = new Rental();
     }
 
 
@@ -77,15 +78,15 @@ public class InitializerBean {
 
     } */
 
-    public void fillUserTable(UserPageService ups) {
-        User adminAdel = new User("Adel", "adel@admins.vhs.com", "Almafa12");
-
-        User adminPeti = new User("Peti", "peti@admins.vhs.com", "MyPWD");
-
-        User adminAlex = new User("Alex", "alex@admins.vhs.com", "pwd");
-
-        ups.add(adminAdel, adminPeti, adminAlex);
-    }
+//    public void fillUserTable(UserPageService ups) {
+//        User adminAdel = new User("Adel", "adel@admins.vhs.com", "Almafa12");
+//
+//        User adminPeti = new User("Peti", "peti@admins.vhs.com", "MyPWD");
+//
+//        User adminAlex = new User("Alex", "alex@admins.vhs.com", "pwd");
+//
+//        ups.add(adminAdel, adminPeti, adminAlex);
+//    }
 
     /*
     private void setupSampleUser(User sampleUser) {
