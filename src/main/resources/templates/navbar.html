@@ -12,10 +12,9 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item" id="loginButton">
-                    <button type="button" class="btn btn-outline-primary my-2 my-sm-2" data-toggle="modal"
-                            data-target="#loginModal">
+                    <a type="button" class="btn btn-outline-primary my-2 my-sm-2" th:href="'/login'">
                         Login
-                    </button>
+                    </a>
                 </li>
                 <li class="nav-item" id="registerButton">
                     <button type="button" class="btn btn-outline-primary my-2 my-sm-2" data-toggle="modal"
@@ -25,17 +24,17 @@
                 </li>
             </ul>
             <div id="logLabel">
-            <!--<span
+            <span
                     th:if="${!loggedIn}"
                     class="navbar-text"
                     th:text="'You are not logged in'"
-            ></span>-->
-                <!--<a
+            ></span>
+                <a
                         class="btn btn-primary btn-sm"
-                        th:href="'/user/' + ${user.getId()}"
+                        th:href="'/user/' + ${userId}"
                         th:if="${loggedIn}"
-                        th:text="${user.getName()}+ '\'s profile'"
-                ></a>-->
+                        th:text="'Go to profile...'"
+                ></a>
             </div>
             <div id="logoutButton">
                 <form action="/logout" method="post" class="form-inline my-2 my-lg-2 ml-2">

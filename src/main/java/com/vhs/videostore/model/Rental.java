@@ -11,8 +11,7 @@ public class Rental {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    private User user;
+    private String userId;
 
     @ManyToMany
     private List<Cassette> cassettes = new ArrayList<>();
@@ -24,8 +23,8 @@ public class Rental {
 
     public Rental() {}
 
-    public Rental(User who, Cassette cassette, long fromDate, long toDate) {
-        this.user = who;
+    public Rental(String userId, Cassette cassette, long fromDate, long toDate) {
+        this.userId = userId;
         this.cassettes.add(cassette);
         this.fromDate = fromDate;
         this.toDate = toDate;
@@ -67,11 +66,11 @@ public class Rental {
         this.cassettes.add(cassette);
     }
 
-    public User getUser() {
-        return user;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(String userId) {
+        this.userId = userId;
     }
 }

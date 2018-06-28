@@ -2,7 +2,6 @@ package com.vhs.videostore.services;
 
 import com.vhs.videostore.model.Movie;
 import com.vhs.videostore.model.SpecialOffer;
-import com.vhs.videostore.model.User;
 import com.vhs.videostore.repository.*;
 import org.omg.CORBA.TIMEOUT;
 import org.springframework.stereotype.Component;
@@ -27,12 +26,12 @@ public class MainPageService {
 
     private MovieRepository movieRepository;
     private SpecialOfferRepository specialOfferRepository;
-    private UserRepository userRepository;
+//    private UserRepository userRepository;
 
-    public MainPageService(MovieRepository movieRepository, SpecialOfferRepository specialOfferRepository, UserRepository userRepository) {
+    public MainPageService(MovieRepository movieRepository, SpecialOfferRepository specialOfferRepository) {
         this.movieRepository = movieRepository;
         this.specialOfferRepository = specialOfferRepository;
-        this.userRepository = userRepository;
+//        this.userRepository = userRepository;
     }
 
     public List<Movie> getAllMovies(){
@@ -44,7 +43,7 @@ public class MainPageService {
 
     }
 
-    public User findById(int id) {
-        return userRepository.getOne(id);
-    }
+//    public User findById(int id) {
+//        return userRepository.getOne(id);
+//    }
 }

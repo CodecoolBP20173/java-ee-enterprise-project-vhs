@@ -37,19 +37,22 @@ public class MainPage{
         if (principal != null) {
             String userId = principal.getName().split("\\|")[1].trim();
             saveObjectToModel(thModel, "userId", userId);
+//            saveObjectToModel(thModel, "loggedIn", true);
+            thModel.addAttribute("loggedIn", "true");
 
             // TODO: I recommend to see this SessionUtils class, it can do what we wanted to achieve with Utility.loginFromSession
             SessionUtils.set(req, "userId", userId);
 
             // Just to show that to userID is in the session
             System.out.println("Logged in UserID in Session: " + req.getSession().getAttribute("userId"));
+        } else {
+            thModel.addAttribute("loggedIn", "false");
         }
 
         List<Movie> movies = mainPageService.getAllMovies();
         List<SpecialOffer> specialOffers = mainPageService.getAllSpecialOffers();
 
         //context = Utility.loginFromSession(context, req);
-
         saveObjectToModel(thModel, "movies", movies);
         saveObjectToModel(thModel, "specialOffers", specialOffers);
 
