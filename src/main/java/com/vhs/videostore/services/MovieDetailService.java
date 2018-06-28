@@ -11,8 +11,12 @@ import java.util.Optional;
 @Service
 public class MovieDetailService {
 
-    @Autowired
     private MovieRepository movieRepository;
+
+
+    public MovieDetailService(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
+    }
 
     public List<Movie> findAll() {
         return movieRepository.findAll();
