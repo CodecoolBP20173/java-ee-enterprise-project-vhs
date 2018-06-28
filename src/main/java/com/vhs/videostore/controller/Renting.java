@@ -21,8 +21,7 @@ public class Renting {
     @RequestMapping(value = "/rent-movie", method = RequestMethod.POST)
     public void rentMovie(
             HttpServletRequest req,
-            @RequestParam("movieId") String movieId,
-            @RequestParam("userId") String userId) {
+            @RequestParam("movieId") String movieId) {
         String renter = (String) SessionUtils.get(req, "userId");
         rentalService.add(renter, Integer.parseInt(movieId));
     }
