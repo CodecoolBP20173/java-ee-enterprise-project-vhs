@@ -15,5 +15,4 @@ public class GetUserId {
         }
         return "1";
     }
-
 }
