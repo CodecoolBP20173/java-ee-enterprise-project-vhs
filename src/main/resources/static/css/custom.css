@@ -38,7 +38,7 @@ body {
 #navbar {
     background-color: #1c1c1c;
     color: whitesmoke;
-    background-image: url('/static/img/filmstrip.jpg');
+    background-image: url('/img/filmstrip.jpg');
     background-repeat: repeat-x;
     background-size: contain;
     height: 100px;

@@ -12,15 +12,18 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item" id="loginButton">
-                    <a type="button" class="btn btn-outline-primary my-2 my-sm-2" th:href="'/login'">
-                        Login
-                    </a>
+                    <form action="/login" method="get">
+                        <button type="submit" class="btn btn-outline-primary my-2 my-sm-2">
+                            Login
+                        </button>
+                    </form>
                 </li>
                 <li class="nav-item" id="registerButton">
-                    <button type="button" class="btn btn-outline-primary my-2 my-sm-2" data-toggle="modal"
-                            data-target="#registrationModal">
-                        Register
-                    </button>
+                    <form action="/login" method="get">
+                        <button type="submit" class="btn btn-outline-primary my-2 my-sm-2">
+                            Register
+                        </button>
+                    </form>
                 </li>
             </ul>
             <div id="logLabel">
@@ -37,8 +40,8 @@
                 ></a>
             </div>
             <div id="logoutButton">
-                <form action="/logout" method="post" class="form-inline my-2 my-lg-2 ml-2">
-                    <button class="btn btn-outline-primary my-2 my-sm-0">
+                <form action="/logout" method="get" class="form-inline my-2 my-lg-2 ml-2">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
                         Logout
                     </button>
                 </form>

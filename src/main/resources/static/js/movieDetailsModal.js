@@ -53,9 +53,9 @@ function evalRentAction(movieId){
         type: 'POST',
         url: '/logged-in-user-id',
         success: function (userId) {
-            if (userId === "0"){
+            if (userId === 1){
                 $('#modal-login-message').html("In order to make a rent please log in or register!");
-                $('#loginModal').modal('show');
+                window.location.href = "http://localhost:8080/login";
             } else {
                 $.ajax({
                     type: 'POST',
