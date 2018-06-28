@@ -1,20 +1,30 @@
 package com.vhs.videostore.controller;
 
-import org.thymeleaf.context.WebContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
-public class Logout extends HttpServlet {
+@SuppressWarnings("unused")
+@Controller
+public class Logout{
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        WebContext context = new WebContext(req, resp, req.getServletContext());
-        HttpSession session = context.getSession();
-        session.invalidate();
-        resp.sendRedirect("/");
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    protected String logout(final HttpServletRequest req) {
+        logger.debug("Performing logout");
+        invalidateSession(req);
+        return "redirect:" + req.getContextPath() + "/login";
     }
+
+    private void invalidateSession(HttpServletRequest request) {
+        if (request.getSession() != null) {
+            request.getSession().invalidate();
+        }
+    }
+
 }

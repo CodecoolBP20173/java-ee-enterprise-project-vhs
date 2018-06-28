@@ -1,14 +1,13 @@
 package com.vhs.videostore.controller;
 
 import com.vhs.videostore.services.RentalService;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-public class Renting extends HttpServlet {
+@RestController
+public class Renting {
 
     private RentalService rentalService;
 
@@ -16,18 +15,10 @@ public class Renting extends HttpServlet {
         this.rentalService = rentalService;
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-         int movieId = Integer.parseInt(req.getParameter("movieId"));
-         int userId = Integer.parseInt(req.getParameter("userId"));
-         rentalService.add(userId, movieId);
-    }
-
-    public RentalService getRentalService() {
-        return rentalService;
-    }
-
-    public void setRentalService(RentalService rentalService) {
-        this.rentalService = rentalService;
+    @RequestMapping(value = "/rent-movie", method = RequestMethod.POST)
+    public void rentMovie(
+            @RequestParam("movieId") String movieId,
+            @RequestParam("userId") String userId) {
+        rentalService.add(Integer.parseInt(userId), Integer.parseInt(movieId));
     }
 }

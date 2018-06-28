@@ -1,57 +1,42 @@
 package com.vhs.videostore.services;
 
 import com.vhs.videostore.model.User;
+import com.vhs.videostore.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
+@Service
 public class UserPageService {
 
-    private EntityManager em;
+    private UserRepository userRepository;
 
-    public UserPageService(EntityManager em) {
-        this.em = em;
+    public UserPageService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public User getUserByID(int _id) throws NoResultException {
-        TypedQuery<User> query = em.createQuery(
-                "SELECT u FROM User u WHERE u.id = :userID", User.class
-        );
-        query.setParameter("userID", _id);
-        return query.getSingleResult();
+    public User getUserByID(int _id){
+        return userRepository.getOne(_id);
     }
 
     public String getHashByEmail(String email) {
-        try {
-            TypedQuery<User> query = em.createQuery(
-                    "SELECT u FROM User u WHERE u.email = :email", User.class
-            );
-            query.setParameter("email", email);
-            return query.getSingleResult().getPwd();
-        } catch (NoResultException e) {
-            return "";
-        }
+        return userRepository.findByEmail(email).getPwd();
     }
 
     public User getUserByEmail(String email) {
-        try {
-            TypedQuery<User> query = em.createQuery(
-                    "SELECT u FROM User u WHERE u.email = :email", User.class
-            );
-            query.setParameter("email", email);
-            return query.getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
+        return userRepository.findByEmail(email);
     }
 
     public void add(User userToAdd) {
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        em.persist(userToAdd);
-        transaction.commit();
-        System.out.println(userToAdd.getName()+" saved to DB...");
+        userRepository.saveAndFlush(userToAdd);
+    }
+
+    public void add(User... users) {
+        for(User user : users) {
+            userRepository.saveAndFlush(user);
+        }
     }
 }

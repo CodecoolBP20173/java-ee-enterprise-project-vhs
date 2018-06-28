@@ -1,22 +1,18 @@
 package com.vhs.videostore;
 
-import com.vhs.videostore.config.testdata.DataFiller;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
+@SpringBootApplication
+@PropertySources({
+        @PropertySource("classpath:application.properties"),
+        @PropertySource("classpath:auth0.properties")
+})
 public class Store {
 
     public static void main(String[] args) {
-        Store vhsStore = new Store();
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("VHS_PU");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        DataFiller df = new DataFiller(entityManager);
-        df.fillMoviesTable();
-        df.fillSpecialOffersTable();
-        df.fillUserTable();
-        entityManager.close();
-        entityManagerFactory.close();
+        SpringApplication.run(Store.class, args);
     }
 }
