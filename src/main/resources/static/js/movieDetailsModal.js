@@ -36,7 +36,7 @@ function showMovieDetails(data) {
         '</div>'
     );
 
-    document.getElementById("modal-movie-picture").style.backgroundImage = 'url(static/img/movie' + data.id + '.jpg)';
+    document.getElementById("modal-movie-picture").style.backgroundImage = 'url(/img/movie' + data.id + '.jpg)';
 
     $('#btn-rent-movie').on('click', function () {
         let movie_id = $(this).data("movie-id");
@@ -48,19 +48,19 @@ function showMovieDetails(data) {
 
 }
 
-function evalRentAction(movieId){
+function evalRentAction(movieId) {
     $.ajax({
         type: 'POST',
         url: '/logged-in-user-id',
         success: function (userId) {
-            if (userId === 1){
+            if (userId === 1) {
                 $('#modal-login-message').html("In order to make a rent please log in or register!");
                 window.location.href = "http://localhost:8080/login";
             } else {
                 $.ajax({
                     type: 'POST',
                     url: '/rent-movie',
-                    data: {'userId': userId, 'movieId' : movieId},
+                    data: {'userId': userId, 'movieId': movieId},
                     success: function () {
                         console.log("Renting action was successful.");
                     }
