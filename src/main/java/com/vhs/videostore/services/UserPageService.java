@@ -33,4 +33,10 @@ public class UserPageService {
     public void add(User userToAdd) {
         userRepository.saveAndFlush(userToAdd);
     }
+
+    public void add(User... users) {
+        for(User user : users) {
+            userRepository.saveAndFlush(user);
+        }
+    }
 }
