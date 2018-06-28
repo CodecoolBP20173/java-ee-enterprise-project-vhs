@@ -1,4 +1,4 @@
-package java.com.vhs.videostore.services;
+package com.vhs.videostore.services;
 
 import com.vhs.videostore.model.Movie;
 import com.vhs.videostore.model.SpecialOffer;
