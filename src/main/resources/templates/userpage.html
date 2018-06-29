@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool/VHS"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+
+    <!-- TODO To import in every html-->
+    <link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
+    <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/customUser.css">
+
+    <title>VHS Store | Profile</title>
+</head>
+<body>
+    <div th:replace="navbar.html :: copy"> </div>
+    <div class="container" id="user">
+        <div id="main-content">
+            <div class="row">
+                <h1 th:text="'| Profile |' "></h1>
+            </div>
+            <div class="row">
+                <div id="user-profile">
+                    <div id="user-picture">
+                        <img src="http://placehold.it/200x200/000/fff" th:attr="src='/img/default_user.jpg'" width="200px" height="200px"/>
+                    </div>
+                    <div id="user-details">
+                        <div>
+                            <label for="user-id">ID</label>
+                            <span id="user-id" th:text="${userId}">00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="user-rental-history">
+                    <h2>Rental history</h2>
+                    <div id="user-rentals" th:switch="${rentals.size()}">
+                        <div th:case="0">
+                            There were no rentals before!
+                        </div>
+                        <table th:case="*" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Cassettes
+                                    </th>
+                                    <th>
+                                        Rental date
+                                    </th>
+                                    <th>
+                                        Date of expire
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <th:block th:each="rental : ${rentals}">
+                                    <tr>
+                                        <td th:text="${rental.getId()}">00</td>
+                                        <td>
+                                            <ul>
+                                            <th:block th:each="casette : ${rental.getCassette()}">
+                                                <li th:text="${casette.getMovie().getTitle()}">Sample data</li>
+                                            </th:block>
+                                            </ul>
+                                        </td>
+                                        <td th:text="${#dates.format(new java.util.Date(rental.getFromDate()))}"></td>
+                                        <td th:text="${#dates.format(new java.util.Date(rental.getToDate()))}"></td>
+                                    </tr>
+                                </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

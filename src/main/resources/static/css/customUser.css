@@ -1,0 +1,33 @@
+div[id="user"] {
+    color: white;
+}
+
+#main-content {
+    padding: 20px 50px;
+}
+
+#user-picture img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+    left: 50%;
+    position: relative;
+    transform: translate(-50%, 0);
+}
+
+#user-profile {
+    padding: 10px;
+    float: left;
+    width: 25%;
+    margin-right: 10%;
+    background-color: #8e8e8e;
+    border-radius: 5px;
+}
+
+#user-rental-history {
+    width: 65%;
+}
+
+label + span {
+    float: right;
+}

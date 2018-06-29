@@ -9,6 +9,8 @@
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
+.idea/compiler.xml
+.idea/encodings.xml
 
 # Sensitive or high-churn files:
 .idea/**/dataSources/
@@ -40,6 +42,8 @@ cmake-build-debug/
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
+.idea
+
 # JIRA plugin
 atlassian-ide-plugin.xml
 
@@ -58,7 +62,7 @@ fabric.properties
 ### Intellij Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 
-# *.iml
+*.iml
 # modules.xml
 # .idea/misc.xml
 # *.ipr
@@ -101,8 +105,17 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
+*.iml
+
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
 
 
 # End of https://www.gitignore.io/api/java,maven,intellij
+
+src/main/resources/META-INF/persistence.xml
+
+*.properties
+
+*.ddl
+
